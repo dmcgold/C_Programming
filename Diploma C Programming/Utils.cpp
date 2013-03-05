@@ -13,6 +13,16 @@ void PressKey(char *Str)
 	while (Ch==254);
 }
 
+char GetCh(void)
+{
+	char Ch=' ';
+	do
+	{
+		Ch=toupper(_getch());
+	} while (Ch==' ');
+	return Ch;
+}
+
 SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End)
 {
 	SYSTEMTIME TotalTime=End;

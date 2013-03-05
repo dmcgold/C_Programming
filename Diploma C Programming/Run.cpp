@@ -21,6 +21,7 @@ void runWeek1(void)
 		cout << "2) Exercise 2" << endl;
 		cout << "3) Exercise 3" << endl;
 		cout << "4) Exercise 4" << endl;
+		cout << "4) Exercise 5" << endl;
 		cout << "Q) Quit" << endl;
 		do
 		{
@@ -47,7 +48,7 @@ void runWeek1(void)
 						Exercise4();
 						PressKey(" ");
 					}
-					break;
+					break;		
 		}
 	} while (Ch!='Q');
 }
@@ -126,10 +127,7 @@ void runTrees(void)
 		cout << "3) Search Tree" << endl;
 		cout << "4) Delete from Tree" << endl;
 		cout << "Q) Quit" << endl;
-		do
-		{
-			Ch=toupper(_getch());
-		} while (Ch==' ');
+		Ch=GetCh();
 		switch (Ch)
 		{
 		case '1' : {
@@ -175,12 +173,31 @@ void runTrees(void)
 					}
 					break;
 		}
+		Ch=GetCh();
 	} while (Ch!='Q');
 }
 
-
 void runHash(void)
 {
-	cout << "The hashcode for hello is : " << HashCode("hello") << endl;
-	PressKey(" ");
+	string Str;
+	char Ch;
+	cout << "Enter 1 for HashCode or 2 for HashMaps : " << endl;
+	Ch=GetCh();
+	
+	switch (Ch)
+	{
+	case '1' : {
+					cout << "Hashcodes" << endl;
+					cout << "Enter a String : ";
+					getline (cin, Str);
+					cout << "The Hash code for " << Str << " is " << HashCode(Str) << endl;
+					PressKey(" ");
+				}
+			   break;
+	case '2' : {
+					HashMaps();
+					PressKey(" ");
+			   }
+			   break;
+	}
 }
