@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\C Programming\Week 1\Week 1.cpp" />
     <ClCompile Include="Binary.cpp" />
     <ClCompile Include="HashCode.cpp" />
     <ClCompile Include="LinkedLists.cpp" />
@@ -88,6 +87,7 @@
     <ClCompile Include="Run Diploma.cpp" />
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Week 1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Binary.h" />

@@ -12,15 +12,44 @@ using namespace std;
 
 void runWeek1(void)
 {
-	char S[20]="Hello World";
-	char N[20]="";
-
-	printf("%s\n",S);
-	cout << endl << N;
-	scopy(S,N,5);
-	cout << endl << N;
-
-	PressKey(" ");
+	char Ch;
+	do
+	{
+		Ch=' ';
+		system("cls");
+		cout << "1) Exercise 1"<< endl;
+		cout << "2) Exercise 2" << endl;
+		cout << "3) Exercise 3" << endl;
+		cout << "4) Exercise 4" << endl;
+		cout << "Q) Quit" << endl;
+		do
+		{
+			Ch=toupper(_getch());
+		} while (Ch==' ');
+		switch (Ch)
+		{
+		case '1' : {
+						Exercise1();
+						PressKey(" ");
+					}
+					break;
+		case '2' : {
+						Exercise2();
+						PressKey(" ");
+					}
+					break;
+		case '3' : {
+						Exercise3();
+						PressKey(" ");
+					}
+					break;
+		case '4' : {
+						Exercise4();
+						PressKey(" ");
+					}
+					break;
+		}
+	} while (Ch!='Q');
 }
 
 void runLinkedLists(void)

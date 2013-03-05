@@ -40,6 +40,7 @@ BinaryStruct **SearchTree(BinaryStruct **Tree,int No)
 			return &(*Tree);
 		SearchTree(&(*Tree)->Right,No);
 	}
+	return Tree;
 }
 
 boolean DeleteLeaf(BinaryStruct **Tree, int Value)
