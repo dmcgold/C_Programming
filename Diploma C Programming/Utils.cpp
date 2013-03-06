@@ -69,3 +69,13 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End)
 
 	return TotalTime;
 }
+
+char GetRandomChar(void)
+{
+	int RandomNo=125;
+
+	
+	while((RandomNo<65) || (RandomNo>122) || ((RandomNo<97) || (RandomNo>122)))
+			RandomNo=(rand() % (122+1-65))+65;
+	return (char) RandomNo;
+}
