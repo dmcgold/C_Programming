@@ -3,7 +3,10 @@
 #include <windows.h>
 #include <time.h>
 
-void PressKey(char *Str);
+using namespace std;
+
+void PressKey(char *);
 char GetCh(void);
-SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End);
-char GetRandomChar(void);
+SYSTEMTIME GetTotalTime(SYSTEMTIME,SYSTEMTIME);
+__int64 StartCounter(double *,int);
+double GetCounter(__int64 ,double );

@@ -1,6 +1,9 @@
 #include "Utils.h"
+#include <Windows.h>
+#include <string>
 
 using namespace std;
+
 
 void PressKey(char *Str)
 {
@@ -68,14 +71,32 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End)
 	}
 
 	return TotalTime;
+
 }
 
-char GetRandomChar(void)
+__int64 StartCounter(double *PCFreq,int Accuracy)
 {
-	int RandomNo=125;
+	LARGE_INTEGER li;
+	if(!QueryPerformanceFrequency(&li))
+	cout << "QueryPerformanceFrequency failed!\n";
 
 	
-	while((RandomNo<65) || (RandomNo>122) || ((RandomNo<97) || (RandomNo>122)))
-			RandomNo=(rand() % (122+1-65))+65;
-	return (char) RandomNo;
+	switch (Accuracy)
+	{
+		case 0 : *PCFreq = double(li.QuadPart);break; // Seconds
+		case 1 : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+		case 2 : *PCFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
+		default : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+	}
+
+	QueryPerformanceCounter(&li);
+	return (li.QuadPart);
 }
+
+double GetCounter(__int64 CounterStart,double PCFreq)
+{
+	LARGE_INTEGER li;
+	QueryPerformanceCounter(&li);
+	return double(li.QuadPart-CounterStart)/PCFreq;
+}
+

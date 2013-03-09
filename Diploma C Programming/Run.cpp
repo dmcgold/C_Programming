@@ -7,6 +7,7 @@
 #include <time.h>
 #include <ctype.h>
 #include <conio.h>
+#include <string>
 
 using namespace std;
 

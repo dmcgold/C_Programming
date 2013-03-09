@@ -6,8 +6,6 @@
 using namespace std;
 
 
-
-
 char *ErrStr(int ErrorLevel)
 {
 	switch (ErrorLevel)

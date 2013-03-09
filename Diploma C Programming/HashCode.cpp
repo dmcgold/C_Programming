@@ -1,11 +1,4 @@
 #include "HashCode.h"
-#include <string.h>
-#include <assert.h>
-#include <stdlib.h> 
-#include "Utils.h"
-
-
-using namespace std;
 
 long HashCode(string Str)
 {
@@ -22,77 +15,135 @@ long HashCode(string Str)
 	return Hash;
 }
 
-
-
-void HashMaps(void)
+BOOLEAN BinarySearch(TA_Struct Search[],string SearchItem)
 {
-	map<string, int> m;
-	struct { // Structure used to compare search speeds with Map
-			 char Str[11];
-			 int  Val;
-			} TestArray[60000];
-	int ArraySize = 60000;
-	SYSTEMTIME  STime,ETime,TotalTime;
-	
-	char Str[11];
-	char *S="**********";
-	long SearchTimes[2];
+	int First = 0;
+	int Last = ARRAY_SIZE - 1;
+	int Middle = (First+Last)/2;
+ 
+	while(First <= Last)
+   {
+	   if (Search[Middle].Str.compare(SearchItem) < 0)
+		 First = Middle + 1;    
+	  else if (Search[Middle].Str.compare(SearchItem)) 
+	  {
+		 break;
+	  }
+	  else
+		 Last = Middle - 1;
+ 
+	  Middle = (First+Last)/2;
+   }
+   if (First > Last)
+	return false;
+   else
+	   return true;
+}
 
+void PrintMSG(string MSG,double SearchTime)
+{
+	cout << MSG << SearchTime << "ms" << endl << endl;
+}
+
+void InsertData(TA_Struct Data[],int Size,map<string,int> Sm)
+{
+	char S[]="1234567890";
+	int No=1;
+	
 	srand (time(NULL));
-	strcpy(Str,S);
-	
-	for(int A=0;A<ArraySize;A++) // Fill array and map with random 6 letter words
+
+	for(int A=0;A<Size;A++) // Fill array and map with random 6 letter words
 	{
-		for(int B=0;B<10;B++) // Create a random string
-		{
-			Str[B]=GetRandomChar(); // Letters from A to z
-		}
-		strcpy(TestArray[A].Str,Str);
-		TestArray[A].Val=A;
-		m[Str]=A;
+		for(int B=0;B<10;B++){	
+				while((No<65) || (No>90) && ((No<97) || (No>122)))
+					No=((rand() % (122+1-65))+65);
+				S[B]=No;
+				No=1;
+			}
+		Data[A].Str=S;
+		Data[A].Val=A;
+		Sm[Data[A].Str]=A;
 	}
-	strcpy(Str,TestArray[ArraySize/2].Str);   // Use whatever at the halfway element for our search
+}
+
+BOOLEAN SearchArray(TA_Struct S[],int Size)
+{
 	int A=0;
-	GetSystemTime(&STime);
-	
-	while(strcmp(TestArray[A].Str,Str) != 0)
+	while((S[A].Str.compare(S[Size/2].Str) !=0) && (A<Size))
 	{
 		A++;
 	}
-	
-	GetSystemTime(&ETime);
-	TotalTime=GetTotalTime(STime,ETime);
-	
-	cout << endl << "Search time (MM:SS:Milliseconds) " << (int) TotalTime.wMinute << ":"\
-			<< (int) TotalTime.wSecond << ":" << (long) TotalTime.wMilliseconds << endl;
-	
-	SearchTimes[0]=(long) TotalTime.wMilliseconds;
 
-	if(A<=ArraySize)
-	{
-		cout << "Found String" << endl;
-		cout << "Key         " << "Value" << endl;
-		cout << TestArray[A].Str << "  " << TestArray[A].Val << endl;
-	}
-	else
-		cout << "String not found" << endl;
-	GetSystemTime(&STime);
-	
-	if (m.find(Str) != m.end())
-	{
-		GetSystemTime(&ETime);
-		TotalTime=GetTotalTime(STime,ETime);
+	return (A<Size);
+}
+
+BOOLEAN SearchMap(map<string,int> m,string Search)
+{
+	return (m.find(Search) == m.end());
+}
+
+void HashMaps(void)
+{
+	map<string, int> MyMap;
+	const int TASize=ARRAY_SIZE;
+	TA_Struct TestArray[TASize]={"",0};
+	double SearchTimes[3]={0};
+	double PCFreq=0.0;
+	QPF_Struct QPF;
+	__int64 StartTime=0;
+	string Str;
 		
-		cout << endl << "Key found " << endl;
-		cout << "Key         " << "Value" << endl;
-		cout << Str << "  at " << m[Str] << endl;
-		cout << endl << "Search time (MM:SS:Milliseconds) " << (int) TotalTime.wMinute << ":"\
-			<< (int) TotalTime.wSecond << ":" << (long) TotalTime.wMilliseconds << endl;
-		SearchTimes[1]=(long) TotalTime.wMilliseconds;
-		cout << "Time to search Array " << SearchTimes[0] << "ms Time to search Map " << SearchTimes[1] << "ms" << endl;
-		if(SearchTimes[0] < SearchTimes[1])
-			cout << "The Array search was faster" << endl;
-		else
-			cout << "The Map search was faster" << endl;
-	}
+	InsertData(TestArray,TASize,MyMap);  // Generate Data
+	system("cls");
+
+	cout << "Searching array - ";
+	StartTime=StartCounter(&PCFreq,1); // Start Array Search
+	
+	if(SearchArray(TestArray,TASize))
+		{
+			SearchTimes[0]=GetCounter(StartTime, PCFreq);
+			PrintMSG("Found string in ",SearchTimes[0]);
+		}
+	else
+		{
+			SearchTimes[0]=100000;
+			cout << "String not found" << endl;
+		}
+
+	cout << "Searching Map - ";
+	StartTime=StartCounter(&PCFreq,1); // Start Map Search
+
+	if(SearchMap(MyMap,TestArray[TASize/2].Str))
+		{
+			SearchTimes[1]=GetCounter(StartTime, PCFreq);
+			PrintMSG("Found string in ",SearchTimes[1]);
+		}
+	else
+		{
+			SearchTimes[1]=100000;
+			cout << "String not found" << endl;
+		}
+
+	cout << "Binary Seach - ";
+	StartTime=StartCounter(&PCFreq,1); // Start Binary Search
+
+	if (BinarySearch(TestArray, TestArray[TASize/2].Str))
+		{
+			SearchTimes[2]=GetCounter(StartTime, PCFreq);
+			PrintMSG("Found string in ",SearchTimes[2]);
+		}
+	else
+		{
+			SearchTimes[2]=100000;
+			cout << "String not found" << endl;
+		}
+	
+	
+	if((SearchTimes[0] < SearchTimes[1]) && (SearchTimes[0] < SearchTimes[2]))
+		Str="Array";
+	else if((SearchTimes[1] < SearchTimes[0]) && (SearchTimes[1] < SearchTimes[2]))
+		Str="Map";
+	else
+		Str="Binary";
+	cout << "The " << Str << " search was the fastest" << endl;
 }
