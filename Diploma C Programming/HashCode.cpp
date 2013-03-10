@@ -1,6 +1,6 @@
 #include "HashCode.h"
 
-long HashCode(string Str)
+long HashCode(string Str) // Simple but works
 {
 	long Hash = 0;
 	int Length=Str.length();	
@@ -12,7 +12,7 @@ long HashCode(string Str)
 			Hash = 31*Hash + (int) Str[A] + ((int) Str[A] >> 4);
 		}
 	}
-	return Hash;
+	return abs(Hash);
 }
 
 BOOLEAN BinarySearch(TA_Struct Search[],string SearchItem)
@@ -82,7 +82,7 @@ BOOLEAN SearchMap(map<string,int> m,string Search)
 	return (m.find(Search) == m.end());
 }
 
-void HashMaps(void)
+void SpeedTest(void)
 {
 	map<string, int> MyMap;
 	const int TASize=ARRAY_SIZE;
@@ -95,6 +95,7 @@ void HashMaps(void)
 	
 	InsertData(TestArray,TASize,MyMap);  // Generate Data
 	system("cls");
+	cout << "Searching " << TASize << " elements" << endl << endl;
 
 	cout << "Searching Map - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Map Search
@@ -104,7 +105,7 @@ void HashMaps(void)
 			PrintMSG("Found string in Map in ",SearchTimes[1]);
 		}
 			
-	cout << "Binary Seach - ";
+	cout << "Binary Search - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Binary Search
 	if (BinarySearch(TestArray, TestArray[TASize/2].Str))
 		{

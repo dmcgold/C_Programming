@@ -182,7 +182,9 @@ void runHash(void)
 {
 	string Str;
 	char Ch;
-	cout << "Enter 1 for HashCode or 2 for HashMaps : " << endl;
+	system("cls");
+	cout << "1) To Create a HashCode for a string" << endl;
+	cout << "2) Compare speeds for HashMap Search,Linear Array Search and Binary Searches : " << endl;
 	Ch=GetCh();
 	
 	switch (Ch)
@@ -196,7 +198,7 @@ void runHash(void)
 				}
 			   break;
 	case '2' : {
-					HashMaps();
+					SpeedTest();
 					PressKey(" ");
 			   }
 			   break;

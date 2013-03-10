@@ -4,7 +4,7 @@
 #include "Logs.h"
 #include "Utils.h"
 
-#define ARRAY_SIZE 6000;
+#define ARRAY_SIZE 10000;
 
 struct TA_Struct {         	   
 	string Str;
@@ -17,5 +17,5 @@ void PrintMSG(string,double);
 void InsertData(TA_Struct Data[],int Size,map<string,int> Sm);
 BOOLEAN SearchArray(TA_Struct *,int);
 BOOLEAN SearchMap(map<string,int> ,string);
-void HashMaps(void);
+void SpeedTest(void);
 
