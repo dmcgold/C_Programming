@@ -89,56 +89,43 @@ void HashMaps(void)
 	TA_Struct TestArray[TASize]={"",0};
 	double SearchTimes[3]={0};
 	double PCFreq=0.0;
-	QPF_Struct QPF;
 	__int64 StartTime=0;
 	string Str;
 		
+	
 	InsertData(TestArray,TASize,MyMap);  // Generate Data
 	system("cls");
 
-	cout << "Searching array - ";
-	StartTime=StartCounter(&PCFreq,1); // Start Array Search
-	
-	if(SearchArray(TestArray,TASize))
-		{
-			SearchTimes[0]=GetCounter(StartTime, PCFreq);
-			PrintMSG("Found string in ",SearchTimes[0]);
-		}
-	else
-		{
-			SearchTimes[0]=100000;
-			cout << "String not found" << endl;
-		}
-
 	cout << "Searching Map - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Map Search
-
 	if(SearchMap(MyMap,TestArray[TASize/2].Str))
 		{
 			SearchTimes[1]=GetCounter(StartTime, PCFreq);
-			PrintMSG("Found string in ",SearchTimes[1]);
+			PrintMSG("Found string in Map in ",SearchTimes[1]);
 		}
-	else
-		{
-			SearchTimes[1]=100000;
-			cout << "String not found" << endl;
-		}
-
+			
 	cout << "Binary Seach - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Binary Search
-
 	if (BinarySearch(TestArray, TestArray[TASize/2].Str))
 		{
 			SearchTimes[2]=GetCounter(StartTime, PCFreq);
-			PrintMSG("Found string in ",SearchTimes[2]);
+			PrintMSG("Found string in Binary search in ",SearchTimes[2]);
 		}
-	else
+	
+	cout << "Searching array (Linear) - ";
+	StartTime=StartCounter(&PCFreq,1); // Start Array Search
+	if(SearchArray(TestArray,TASize))
 		{
-			SearchTimes[2]=100000;
-			cout << "String not found" << endl;
+			SearchTimes[0]=GetCounter(StartTime, PCFreq);
+			PrintMSG("Found string in Array in ",SearchTimes[0]);
 		}
 	
-	
+	for(int A=0;A<3;A++)
+	{
+		if(SearchTimes[A]==0)
+			PrintMSG("Error in search ",A);
+	}
+
 	if((SearchTimes[0] < SearchTimes[1]) && (SearchTimes[0] < SearchTimes[2]))
 		Str="Array";
 	else if((SearchTimes[1] < SearchTimes[0]) && (SearchTimes[1] < SearchTimes[2]))
