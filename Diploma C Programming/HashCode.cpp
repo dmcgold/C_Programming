@@ -39,7 +39,10 @@ BOOLEAN BinarySearch(TA_Struct Search[],string SearchItem)
    if (First > Last)
 	return false;
    else
-	   return true;
+   {
+		cout << "Found " << SearchItem << " at element " << Last << endl;
+		return true;
+   }
 }
 
 void PrintMSG(string MSG,double SearchTime)
@@ -64,7 +67,7 @@ void InsertData(TA_Struct Data[],int Size,map<string,int> Sm)
 			}
 		Data[A].Str=S;
 		Data[A].Val=A;
-		Sm[Data[A].Str]=A;
+		Sm[Data[A].Str]=HashCode(S);
 	}
 }
 
@@ -75,13 +78,19 @@ BOOLEAN SearchArray(TA_Struct S[],int Size,string Search)
 	{
 		A++;
 	}
-
+	if(A<Size)
+		cout << "Found " << Search << " at element " << A << endl;
 	return (A<Size);
 }
 
 BOOLEAN SearchMap(map<string,int> m,string Search)
 {
-	return (m.find(Search) == m.end());
+	map<string,int>::iterator Key = m.find(Search);
+	boolean Found=(Key != m.end());
+
+	if(Found)
+		cout << "Found " << Search << " with Key " << Key->second;
+	return Found;
 }
 
 void SpeedTest(void)
@@ -89,7 +98,7 @@ void SpeedTest(void)
 	map<string, int> MyMap;
 	const int TASize=ARRAY_SIZE;
 	TA_Struct TestArray[TASize]={"",0};
-	double SearchTimes[3]={0};
+	double SearchTimes[3]={100000};
 	double PCFreq=0.0;
 	__int64 StartTime=0;
 	string Str;
@@ -108,6 +117,8 @@ void SpeedTest(void)
 			SearchTimes[1]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Map in ",SearchTimes[1]);
 		}
+	else
+		cout << "Not Found" << endl << endl;
 			
 	cout << "Binary Search - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Binary Search
@@ -116,7 +127,8 @@ void SpeedTest(void)
 			SearchTimes[2]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Binary search in ",SearchTimes[2]);
 		}
-	
+	else
+		cout << "Not Found" << endl << endl;
 	cout << "Searching array (Linear) - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Array Search
 	if(SearchArray(TestArray,TASize,Str))
@@ -124,12 +136,8 @@ void SpeedTest(void)
 			SearchTimes[0]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Array in ",SearchTimes[0]);
 		}
-	
-	for(int A=0;A<3;A++)
-	{
-		if(SearchTimes[A]==0)
-			PrintMSG("Error in search ",A);
-	}
+	else
+		cout << "Not Found" << endl << endl;	
 
 	if((SearchTimes[0] < SearchTimes[1]) && (SearchTimes[0] < SearchTimes[2]))
 		Str="Array";

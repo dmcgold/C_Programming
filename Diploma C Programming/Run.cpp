@@ -59,6 +59,7 @@ void runLinkedLists(void)
 	ListStruct *Data;
 
 	Data=NULL;
+	srand (time(NULL));
 
 	char Ch=' ';
 	int No=0;	
@@ -70,6 +71,7 @@ void runLinkedLists(void)
 		cout << "2) Display Nodes" << endl;
 		cout << "3) Search Nodes" << endl;
 		cout << "4) Delete Nodes" << endl;
+		cout << "5) Sort Nodes" << endl;
 		cout << "Q) Quit" << endl;
 		do
 		{
@@ -80,10 +82,10 @@ void runLinkedLists(void)
 		case '1' : {
 						cout << "Adding to Nodes" << endl;
 						for(int A=1; A<10; A++)
-						{
-							AddNode(&Data,A);
+						{							
+							AddNode(&Data,rand() % 10);
 						}
-						Log("Adding to trees",MinorError,Out_to_File);
+						Log("Adding Nodes to list",MinorError,Out_to_File);
 					}
 					break;
 		case '2' : {
@@ -94,7 +96,10 @@ void runLinkedLists(void)
 		case '3' : {
 						cout << "Enter No to search for : ";
 						cin >> No;
-						cout << "Found : " << No << endl;
+						if(SearchNodes(Data,No))
+							cout << No << " found" << endl;
+						else
+							cout << No << " not found" << endl;
 						PressKey(" ");
 					}
 					break;
@@ -105,6 +110,10 @@ void runLinkedLists(void)
 						DeleteNode(&Data,No);
 					}
 					break;
+		case '5' : {
+						Sort(&Data);
+				   }
+				   break;
 		}
 	} while (Ch!='Q');
 }	
@@ -174,7 +183,6 @@ void runTrees(void)
 					}
 					break;
 		}
-		Ch=GetCh();
 	} while (Ch!='Q');
 }
 
