@@ -1,5 +1,7 @@
 #include "HashCode.h"
 
+using namespace std;
+
 long HashCode(string Str) // Simple but works
 {
 	long Hash = 0;
@@ -66,10 +68,10 @@ void InsertData(TA_Struct Data[],int Size,map<string,int> Sm)
 	}
 }
 
-BOOLEAN SearchArray(TA_Struct S[],int Size)
+BOOLEAN SearchArray(TA_Struct S[],int Size,string Search)
 {
 	int A=0;
-	while((S[A].Str.compare(S[Size/2].Str) !=0) && (A<Size))
+	while((S[A].Str.compare(Search) !=0) && (A<Size))
 	{
 		A++;
 	}
@@ -94,12 +96,14 @@ void SpeedTest(void)
 		
 	
 	InsertData(TestArray,TASize,MyMap);  // Generate Data
+	Str=TestArray[TASize-1].Str;
+
 	system("cls");
-	cout << "Searching " << TASize << " elements" << endl << endl;
+	cout << "Searching " << TASize << " elements for " << Str << endl << endl;
 
 	cout << "Searching Map - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Map Search
-	if(SearchMap(MyMap,TestArray[TASize/2].Str))
+	if(SearchMap(MyMap,Str))
 		{
 			SearchTimes[1]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Map in ",SearchTimes[1]);
@@ -107,7 +111,7 @@ void SpeedTest(void)
 			
 	cout << "Binary Search - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Binary Search
-	if (BinarySearch(TestArray, TestArray[TASize/2].Str))
+	if (BinarySearch(TestArray, Str))
 		{
 			SearchTimes[2]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Binary search in ",SearchTimes[2]);
@@ -115,7 +119,7 @@ void SpeedTest(void)
 	
 	cout << "Searching array (Linear) - ";
 	StartTime=StartCounter(&PCFreq,1); // Start Array Search
-	if(SearchArray(TestArray,TASize))
+	if(SearchArray(TestArray,TASize,Str))
 		{
 			SearchTimes[0]=GetCounter(StartTime, PCFreq);
 			PrintMSG("Found string in Array in ",SearchTimes[0]);

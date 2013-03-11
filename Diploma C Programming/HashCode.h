@@ -15,7 +15,7 @@ long HashCode(string);
 BOOLEAN BinarySearch(TA_Struct *,string);
 void PrintMSG(string,double);
 void InsertData(TA_Struct Data[],int Size,map<string,int> Sm);
-BOOLEAN SearchArray(TA_Struct *,int);
+BOOLEAN SearchArray(TA_Struct *,int,string);
 BOOLEAN SearchMap(map<string,int> ,string);
 void SpeedTest(void);
 
