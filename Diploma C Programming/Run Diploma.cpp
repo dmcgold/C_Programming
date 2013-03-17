@@ -2,7 +2,6 @@
 #include "Run.h"
 #include <conio.h>
 
-
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -27,10 +26,10 @@ int main(int argc, char* argv[])
 		} while (Ch==' ');
 		switch (Ch)
 		{
-			case '1' : runWeek1();break;
-			case '2' : runLinkedLists();break;
-			case '3' : runTrees();break;
-			case '4' : runHash();break;				
+		case '1' : runWeek1();break;
+		case '2' : runLinkedLists();break;
+		case '3' : runTrees();break;
+		case '4' : runHash();break;
 		}
 	} while (Ch!='Q');
 }

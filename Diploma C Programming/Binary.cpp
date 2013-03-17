@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void AddToTree(BinaryStruct **Tree, int Value)
 {
 	if( (*Tree) == NULL)
@@ -33,14 +32,18 @@ void DisplayTree(BinaryStruct **Tree)
 
 BinaryStruct **SearchTree(BinaryStruct **Tree,int No)
 {
-	if (*Tree != NULL)
+	BinaryStruct **tmp= Tree;
+
+	while (*tmp != NULL)
 	{
-		SearchTree(&(*Tree)->Left,No);
-		if(No==(*Tree)->Value)
-			return &(*Tree);
-		SearchTree(&(*Tree)->Right,No);
+		if(No < (*tmp)->Value)
+			tmp = &(*tmp)->Left;
+		else if ((*tmp)->Value < No)
+			tmp = &(*tmp)->Right;
+		else
+			break;
 	}
-	return Tree;
+	   return tmp;
 }
 
 boolean DeleteLeaf(BinaryStruct **Tree, int Value)
@@ -50,7 +53,7 @@ boolean DeleteLeaf(BinaryStruct **Tree, int Value)
 	Log("Deleting from tree",MajorError,Out_to_File);
 	Tree=SearchTree(Tree,Value);
 
-	if (((*Tree)==NULL) || ((*Tree)->Value != Value))
+	if ((*Tree)->Value != Value)
 		return FALSE;
 
 	Temp=(*Tree);

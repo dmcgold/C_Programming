@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 void PressKey(char *Str)
 {
 	char Ch=(char) 254;
@@ -71,22 +70,20 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End)
 	}
 
 	return TotalTime;
-
 }
 
 __int64 StartCounter(double *PCFreq,int Accuracy)
 {
 	LARGE_INTEGER li;
 	if(!QueryPerformanceFrequency(&li))
-	cout << "QueryPerformanceFrequency failed!\n";
+		cout << "QueryPerformanceFrequency failed!\n";
 
-	
 	switch (Accuracy)
 	{
-		case 0 : *PCFreq = double(li.QuadPart);break; // Seconds
-		case 1 : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
-		case 2 : *PCFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
-		default : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+	case 0 : *PCFreq = double(li.QuadPart);break; // Seconds
+	case 1 : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+	case 2 : *PCFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
+	default : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
 	}
 
 	QueryPerformanceCounter(&li);
@@ -99,4 +96,3 @@ double GetCounter(__int64 CounterStart,double PCFreq)
 	QueryPerformanceCounter(&li);
 	return double(li.QuadPart-CounterStart)/PCFreq;
 }
-

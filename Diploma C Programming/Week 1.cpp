@@ -20,7 +20,7 @@ void Exercise1(void)
 	float Number6=60;
 	double Number7=70;
 	signed int Number8=80;
-	
+
 	No1=&Number1;
 	No2=&Number2;
 	No3=&Number3;
@@ -60,7 +60,7 @@ void Exercise2(void)
 	for(Counter=0;Counter<5;Counter++)
 	{
 		printf("Array Value   %d,  ",Array[Counter]);
-		
+
 		printf("Pointer Value %d\n",*Pointer++);
 	}
 }
@@ -80,13 +80,12 @@ void Exercise3(void)
 
 	cout << "Original Number " << *Number << endl;
 	Modify(Number);
-	
+
 	cout << "New Number " << *Number << endl;
 }
 
 void Exercise4(void)
 {
-
 	char S[20]="Hello World";
 	char N[20]="";
 

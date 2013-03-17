@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void AddNode(ListStruct **List,int Val)
 {
 	struct ListStruct *Head=*List;
@@ -65,17 +64,6 @@ void DisplayNodes(ListStruct **List)
 	}
 }
 
-boolean SearchNodes(ListStruct *Nodes,int SearchItem)
-{
-	boolean Found = false;
-
-	while((Nodes) && (!Found))
-	{		
-		Found = (Nodes->Val == SearchItem);
-		Nodes=Nodes->Next;
-	}
-	return Found;
-}
 void DisplayDouble(ListStruct **List)
 {
 	if((*List)!=NULL)
@@ -85,59 +73,20 @@ void DisplayDouble(ListStruct **List)
 	}
 }
 
-//void insertionSort(int arr[], int length) {
-//
-//      int i, j, tmp;
-//
-//      for (i = 1; i < length; i++) {
-//
-//            j = i;
-//
-//            while (j > 0 && arr[j - 1] > arr[j]) {
-//
-//                  tmp = arr[j];
-//
-//                  arr[j] = arr[j - 1];
-//
-//                  arr[j - 1] = tmp;
-//
-//                  j--;
-//
-//            }
-//
-//      }
-//
-//}
-//int insertionsort(int *arr,int n)
-//05	{
-//06	    int i,j,temp;
-//07	for(i=1;i<n;i++)
-//08	    {
-//09	        temp=*(arr+i);
-//10	        j=i-1;
-//11	        while(temp<*(arr+j)&&j>=0)
-//12	        {
-//13	            *(arr+(j+1))=*(arr+j);
-//14	            j--;
-//15	        }
-//16	        *(arr+(j+1))=temp;
-//17	    }
-//18	    return 0;
-//19	}
 ListStruct*  InsertSort(ListStruct **List)
 {
 	ListStruct *ListStructs = *(List);
 	ListStruct *Sorted = NULL;
- 
+
 	while (ListStructs != NULL)
 	{
 		ListStruct *Head  = ListStructs;
 		ListStruct **Prev = &Sorted;
 		ListStructs = ListStructs->Next;
- 
+
 		while (TRUE)
 		{
-			if ((&(*Prev)) || ((int) Head->Val < (int) (*Prev)->Val ))
+			if ((*Prev) || ((int) Head->Val < (int) (*Prev)->Val ))
 			{
 				Head->Next = *Prev;
 				*Prev = Head;
@@ -154,18 +103,13 @@ ListStruct*  InsertSort(ListStruct **List)
 
 void Sort(ListStruct **List)
 {
-	double TotalTime;
-	__int64 StartTime;
-	double PCFreq=0.0;
+	SYSTEMTIME  STime,ETime,TotalTime;
 
 	cout << endl << "Sorting list" << endl;
-
-	StartTime = StartCounter(&PCFreq,1);
-
-	(*List)=InsertSort(&(*List)); 
-	
-	TotalTime=GetCounter(StartTime ,PCFreq );
-
-	cout << "Sort completion time (Milliseconds) " << TotalTime << endl;
-	PressKey(" ");
+	GetSystemTime(&STime);
+	(*List)=InsertSort(&(*List));
+	GetSystemTime(&ETime);
+	TotalTime=GetTotalTime(STime,ETime);
+	cout << "Sort completion time (MM:SS:Milliseconds) " << (int) TotalTime.wMinute << ":"\
+		<< (int) TotalTime.wSecond << ":" << (long) TotalTime.wMilliseconds << endl;
 }

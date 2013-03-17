@@ -3,4 +3,55 @@
 [5/3/2013][22:32:18] Adding to trees Minor error
 [5/3/2013][22:32:35] Adding to trees Minor error
 [9/3/2013][0:57:46] Adding to trees Minor error
-[10/3/2013][13:25:14] Adding to trees Minor error
+[17/3/2013][13:10:33] Adding to trees Minor error
+[17/3/2013][13:11:4] Adding to trees Minor error
+[17/3/2013][13:19:44] Adding to trees Minor error
+[17/3/2013][13:20:58] Adding to trees Minor error
+[17/3/2013][13:22:14] Adding to trees Minor error
+[17/3/2013][13:23:25] Adding to trees Minor error
+[17/3/2013][13:23:48] Searching for  Minor error
+[17/3/2013][13:23:48] Deleting from tree Major error
+[17/3/2013][13:23:48] Failed to find ListStruct Major error
+[17/3/2013][13:23:55] Searching for  Minor error
+[17/3/2013][13:23:55] Deleting from tree Major error
+[17/3/2013][13:23:55] Failed to find ListStruct Major error
+[17/3/2013][13:27:41] Adding to trees Minor error
+[17/3/2013][13:31:21] Adding to trees Minor error
+[17/3/2013][13:37:53] Adding to trees Minor error
+[17/3/2013][13:42:44] Adding to trees Minor error
+[17/3/2013][13:44:42] Adding to trees Minor error
+[17/3/2013][13:45:4] Searching for  Minor error
+[17/3/2013][13:45:4] Deleting from tree Major error
+[17/3/2013][13:45:4] Failed to find ListStruct Major error
+[17/3/2013][13:45:16] Searching for  Minor error
+[17/3/2013][13:45:16] Deleting from tree Major error
+[17/3/2013][13:45:16] Failed to find ListStruct Major error
+[17/3/2013][13:45:19] Searching for  Minor error
+[17/3/2013][13:45:19] Deleting from tree Major error
+[17/3/2013][13:45:19] Failed to find ListStruct Major error
+[17/3/2013][13:46:33] Searching for  Minor error
+[17/3/2013][13:46:33] Deleting from tree Major error
+[17/3/2013][13:49:1] Adding to trees Minor error
+[17/3/2013][13:49:9] Searching for  Minor error
+[17/3/2013][13:49:9] Deleting from tree Major error
+[17/3/2013][14:24:56] Adding to trees Minor error
+[17/3/2013][14:30:14] Adding to trees Minor error
+[17/3/2013][14:31:45] Adding to trees Minor error
+[17/3/2013][22:35:36] Adding to trees Minor error
+[17/3/2013][22:38:36] Adding to trees Minor error
+[17/3/2013][22:40:20] Adding to trees Minor error
+[17/3/2013][22:44:55] Adding to trees Minor error
+[17/3/2013][22:46:49] Adding to trees Minor error
+[17/3/2013][23:6:48] Adding to trees Minor error
+[17/3/2013][23:8:6] Adding to trees Minor error
+[17/3/2013][23:12:41] Adding to trees Minor error
+[17/3/2013][23:16:0] Adding to trees Minor error
+[17/3/2013][23:17:38] Adding to trees Minor error
+[17/3/2013][23:20:17] Adding to trees Minor error
+[17/3/2013][23:22:39] Adding to trees Minor error
+[17/3/2013][23:40:44] Adding to trees Minor error
+[17/3/2013][23:43:7] Adding to trees Minor error
+[17/3/2013][23:47:27] Adding to trees Minor error
+[17/3/2013][23:50:20] Adding to trees Minor error
+[17/3/2013][23:50:25] Searching for  Minor error
+[17/3/2013][23:50:25] Deleting from tree Major error
