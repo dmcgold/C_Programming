@@ -55,3 +55,12 @@
 [17/3/2013][23:50:20] Adding to trees Minor error
 [17/3/2013][23:50:25] Searching for  Minor error
 [17/3/2013][23:50:25] Deleting from tree Major error
+[18/3/2013][0:21:42] Adding to trees Minor error
+[18/3/2013][0:22:12] Searching for  Minor error
+[18/3/2013][0:22:12] Deleting from tree Major error
+[18/3/2013][0:23:2] Adding to trees Minor error
+[18/3/2013][0:31:38] Adding to trees Minor error
+[18/3/2013][0:32:6] Adding to trees Minor error
+[18/3/2013][0:34:42] Adding to trees Minor error
+[18/3/2013][0:37:34] Adding to trees Minor error
+[18/3/2013][0:40:34] Adding to trees Minor error

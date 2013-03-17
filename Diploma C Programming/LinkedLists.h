@@ -12,5 +12,6 @@ void AddDoubleNode(ListStruct **,ListStruct **,int);
 void DeleteNode(ListStruct **,int);
 void DisplayNodes(ListStruct **);
 void DisplayDouble(ListStruct **);
+boolean SearchNodes(ListStruct **,int);
 ListStruct* InsertSort(ListStruct **);
 void Sort(ListStruct **);

@@ -73,6 +73,18 @@ void DisplayDouble(ListStruct **List)
 	}
 }
 
+boolean SearchNodes(ListStruct **List,int No)
+{
+	while((*List != NULL) && ((*List)->Val != No))
+	{
+		List=&(*List)->Next;
+	}
+	if(((*List) != NULL) && (*List)->Val == No)
+		return TRUE;
+	else
+		return FALSE;
+}
+
 ListStruct*  InsertSort(ListStruct **List)
 {
 	ListStruct *ListStructs = *(List);

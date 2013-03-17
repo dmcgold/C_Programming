@@ -69,6 +69,7 @@ void runLinkedLists(void)
 		cout << "2) Display Nodes" << endl;
 		cout << "3) Search Nodes" << endl;
 		cout << "4) Delete Nodes" << endl;
+		cout << "5) Sort Nodes" << endl;
 		cout << "Q) Quit" << endl;
 		do
 		{
@@ -93,7 +94,10 @@ void runLinkedLists(void)
 		case '3' : {
 			cout << "Enter No to search for : ";
 			cin >> No;
-			cout << "Found : " << No << endl;
+			if(SearchNodes(&Data,No))
+				cout << "Found : " << No << endl;
+			else
+				cout << No << " Not found"  << endl;
 			PressKey(" ");
 				   }
 				   break;
@@ -104,6 +108,11 @@ void runLinkedLists(void)
 			DeleteNode(&Data,No);
 				   }
 				   break;
+		case '5' : {
+			cout << "Sorting" << endl;
+			InsertSort(&Data);
+			cout << "Done" << endl;
+					}
 		}
 	} while (Ch!='Q');
 }
