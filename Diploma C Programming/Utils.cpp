@@ -96,3 +96,19 @@ double GetCounter(__int64 CounterStart,double PCFreq)
 	QueryPerformanceCounter(&li);
 	return double(li.QuadPart-CounterStart)/PCFreq;
 }
+
+char *randomString(int Size)
+{
+	int no=1;
+	char str[]="1234567890";
+
+	srand ((unsigned int) time(NULL));
+
+	for(int b=0;b<10;b++){
+		while((no<65) || (no>90) && ((no<97) || (no>122)))
+			no=((rand() % (122+1-65))+65);
+		str[b]=no;
+		no=0;
+	}
+	return str;
+}

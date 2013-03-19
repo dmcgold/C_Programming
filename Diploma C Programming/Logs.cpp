@@ -9,13 +9,13 @@ char *ErrStr(int ErrorLevel)
 {
 	switch (ErrorLevel)
 	{
-	case MinorError :	return "Minor error";
+	case MINOR_ERROR :	return "Minor error";
 		break;
-	case MediumError :	return "Medium error";
+	case MEDIUM_ERROR :	return "Medium error";
 		break;
-	case MajorError :	return "Major error";
+	case MAJOR_ERROR :	return "Major error";
 		break;
-	case Testing	:	return "Testing only";
+	case TESTING	:	return "TESTING only";
 		break;
 	}
 	return "No Error";
@@ -25,11 +25,11 @@ int Log(char *Str, int ErrorLevel,int Output)
 	SYSTEMTIME time;
 	GetLocalTime(&time);
 
-#ifdef CreateLog
+#ifdef CREATE_LOG
 	{
 		switch(Output)
 		{
-		case Out_to_File :
+		case OUT_TO_FILE :
 			{
 				ofstream LogFile;
 				LogFile.open ("log..txt",ios::app);
@@ -38,9 +38,9 @@ int Log(char *Str, int ErrorLevel,int Output)
 				LogFile.close();
 			}
 			break;
-		case Out_to_Scr :
+		case OUT_TO_SCR :
 			{
-				cout << "[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
+				cout << "\n[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
 					<< time.wMinute << ":" << time.wSecond << "] " << Str << " " << ErrStr(ErrorLevel) << "\n";
 			};
 			break;

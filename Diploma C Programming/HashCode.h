@@ -1,20 +1,16 @@
-#include <map>
-#include <string>
-#include <Windows.h>
 #include "Logs.h"
 #include "Utils.h"
 
-#define ARRAY_SIZE 6000;
+#define ARRAY_SIZE 100;
 
-struct TA_Struct {
-	string Str;
-	int Val;
+struct mStruct   // mStruct = Map Structure
+{
+	char *Key;
+	int Value;
+	struct mStruct *Next;
 };
 
-long HashCode(string);
-BOOLEAN BinarySearch(TA_Struct *,string);
-void PrintMSG(string,double);
-void InsertData(TA_Struct Data[],int Size,map<string,int> Sm);
-BOOLEAN SearchArray(TA_Struct *,int);
-BOOLEAN SearchMap(map<string,int> ,string);
-void HashMaps(void);
+unsigned int HashCode(char *);
+void AddNode(mStruct **,char * ,int);
+int Add(char *,int,mStruct []);
+unsigned int Find(char *,mStruct []);

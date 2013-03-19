@@ -43,14 +43,14 @@ BinaryStruct **SearchTree(BinaryStruct **Tree,int No)
 		else
 			break;
 	}
-	   return tmp;
+	return tmp;
 }
 
 boolean DeleteLeaf(BinaryStruct **Tree, int Value)
 {
 	BinaryStruct *Temp;
 	BinaryStruct *MoveNode;
-	Log("Deleting from tree",MajorError,Out_to_File);
+	Log("Deleting from tree",MAJOR_ERROR,OUT_TO_FILE);
 	Tree=SearchTree(Tree,Value);
 
 	if ((*Tree)->Value != Value)

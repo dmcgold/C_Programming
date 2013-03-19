@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 		cout << "1) Week 1" << endl;
 		cout << "2) Linked Lists" << endl;
 		cout << "3) Play with Trees" << endl;
-		cout << "4) HashCodes/HashMaps" << endl;
+		cout << "4) HashMaps" << endl;
 		cout << "Q) Quit" << endl;
 		do
 		{

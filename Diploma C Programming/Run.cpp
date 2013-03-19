@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <conio.h>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -83,7 +84,7 @@ void runLinkedLists(void)
 			{
 				AddNode(&Data,A);
 			}
-			Log("Adding to trees",MinorError,Out_to_File);
+			Log("Adding to trees",MINOR_ERROR,OUT_TO_FILE);
 				   }
 				   break;
 		case '2' : {
@@ -112,7 +113,7 @@ void runLinkedLists(void)
 			cout << "Sorting" << endl;
 			InsertSort(&Data);
 			cout << "Done" << endl;
-					}
+				   }
 		}
 	} while (Ch!='Q');
 }
@@ -142,7 +143,6 @@ void runTrees(void)
 		{
 		case '1' : {
 			cout << "Adding to trees\n";
-			// srand((unsigned int) time(NULL));
 			AddToTree(&Tree, 5);
 			AddToTree(&Tree, 3);
 			AddToTree(&Tree, 2);
@@ -151,7 +151,7 @@ void runTrees(void)
 			AddToTree(&Tree, 6);
 			AddToTree(&Tree, 10);
 			AddToTree(&Tree, 9);
-			Log("Adding to trees",MinorError,Out_to_File);
+			Log("Adding to trees",MINOR_ERROR,OUT_TO_FILE);
 				   }
 				   break;
 		case '2' : {
@@ -161,7 +161,7 @@ void runTrees(void)
 				   break;
 		case '3' : {
 			cout << "Enter No to search for : ";
-			cin >> No;	
+			cin >> No;
 			tmp=(*SearchTree(&Tree,No));
 			if(tmp!=NULL)
 				cout << "Found : " << No << endl;
@@ -173,15 +173,13 @@ void runTrees(void)
 		case '4' : {
 			cout << "Enter No to search for : ";
 			cin >> No;
-
-			//itoa(No,S,10);
-			Log(Str,MinorError,Out_to_File);
+			Log(Str,MINOR_ERROR,OUT_TO_FILE);
 			if(DeleteLeaf(&Tree,No))
 				cout << "Success" << endl;
 			else
 			{
 				cout << "Failure" << endl;
-				Log("Failed to find ListStruct",MajorError,Out_to_File);
+				Log("Failed to find ListStruct",MAJOR_ERROR,OUT_TO_FILE);
 			}
 			PressKey(" ");
 				   }
@@ -192,25 +190,26 @@ void runTrees(void)
 
 void runHash(void)
 {
-	string Str;
-	char Ch;
-	cout << "Enter 1 for HashCode or 2 for HashMaps : " << endl;
-	Ch=GetCh();
+	int const Size=ARRAY_SIZE;
+	mStruct hashMap[Size]={"",0,NULL};
+	char *Str[]={"Apple","Oranges","Pears","Apple","Apple","Pear"}; // 2 apples
+	int sizeOfStr=sizeof(Str) / sizeof(int);
+	int Hash;
+	printf("Adding Data to Map\n");
 
-	switch (Ch)
+	for(int A=0;A<sizeOfStr;A++)
 	{
-	case '1' : {
-		cout << "Hash codes" << endl;
-		cout << "Enter a String : ";
-		getline (cin, Str);
-		cout << "The Hash code for " << Str << " is " << HashCode(Str) << endl;
-		PressKey(" ");
-			   }
-			   break;
-	case '2' : {
-		HashMaps();
-		PressKey(" ");
-			   }
-			   break;
+		printf("Adding %s \n",Str[A]);
+		Add(Str[A],A,hashMap);
 	}
+	for(int A=0;A<sizeOfStr;A++)
+	{
+		printf("Search for %s\n",Str[A]);
+		Hash=Find(Str[A],hashMap);
+		if(Hash!=0)
+		{
+			printf("Found key %s at %d\n",Str[A], Hash);
+		}
+	}
+	PressKey("Done ....");
 }

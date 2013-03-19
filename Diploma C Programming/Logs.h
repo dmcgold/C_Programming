@@ -1,11 +1,11 @@
-#define CreateLog 0
+#define CREATE_LOG 0
 
-#define Testing		0
-#define MinorError	1
-#define MediumError 2
-#define MajorError 3
-#define Out_to_File 5
-#define Out_to_Scr  6
+#define TESTING		 0
+#define MINOR_ERROR	 1
+#define MEDIUM_ERROR 2
+#define MAJOR_ERROR  3
+#define OUT_TO_FILE  5
+#define OUT_TO_SCR   6
 
 char *ErrStr(int);
 int Log(char * ,int, int);
