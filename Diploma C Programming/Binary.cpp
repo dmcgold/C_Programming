@@ -2,43 +2,43 @@
 
 using namespace std;
 
-void AddToTree(BinaryStruct **Tree, int Value)
+void AddToTree(BinaryStruct **bTree, int bValue)
 {
-	if( (*Tree) == NULL)
+	if( (*bTree) == NULL)
 	{
-		(*Tree) = new BinaryStruct;
-		(*Tree)->Value=Value;
-		(*Tree)->Left=NULL;
-		(*Tree)->Right=NULL;
+		(*bTree) = new BinaryStruct;
+		(*bTree)->Value=bValue;
+		(*bTree)->Left=NULL;
+		(*bTree)->Right=NULL;
 	}
 	else
 	{
-		if((*Tree)->Value <= Value)
-			AddToTree( &(*Tree)->Right,Value);
+		if((*bTree)->Value <= bValue)
+			AddToTree( &(*bTree)->Right,bValue);
 		else
-			AddToTree( &(*Tree)->Left,Value);
+			AddToTree( &(*bTree)->Left,bValue);
 	}
 }
 
-void DisplayTree(BinaryStruct **Tree)
+void DisplayTree(BinaryStruct **bTree)
 {
-	if (*Tree != NULL)
+	if (*bTree != NULL)
 	{
-		DisplayTree(&(*Tree)->Left);
-		cout << "Value is " << (*Tree)->Value << '\n';
-		DisplayTree(&(*Tree)->Right);
+		DisplayTree(&(*bTree)->Left);
+		cout << "Value is " << (*bTree)->Value << '\n';
+		DisplayTree(&(*bTree)->Right);
 	}
 }
 
-BinaryStruct **SearchTree(BinaryStruct **Tree,int No)
+BinaryStruct **SearchTree(BinaryStruct **bTree,int bValue)
 {
-	BinaryStruct **tmp= Tree;
+	BinaryStruct **tmp= bTree;
 
 	while (*tmp != NULL)
 	{
-		if(No < (*tmp)->Value)
+		if(bValue < (*tmp)->Value)
 			tmp = &(*tmp)->Left;
-		else if ((*tmp)->Value < No)
+		else if ((*tmp)->Value < bValue)
 			tmp = &(*tmp)->Right;
 		else
 			break;
@@ -46,47 +46,47 @@ BinaryStruct **SearchTree(BinaryStruct **Tree,int No)
 	return tmp;
 }
 
-boolean DeleteLeaf(BinaryStruct **Tree, int Value)
+boolean DeleteLeaf(BinaryStruct **bTree, int bValue)
 {
-	BinaryStruct *Temp;
-	BinaryStruct *MoveNode;
+	BinaryStruct *bTemp;
+	BinaryStruct *moveNode;
 	Log("Deleting from tree",MAJOR_ERROR,OUT_TO_FILE);
-	Tree=SearchTree(Tree,Value);
+	bTree=SearchTree(bTree,bValue);
 
-	if ((*Tree)->Value != Value)
+	if ((*bTree)->Value != bValue)
 		return FALSE;
 
-	Temp=(*Tree);
+	bTemp=(*bTree);
 
-	if(((*Tree)->Left==NULL) && ((*Tree)->Right==NULL))
+	if(((*bTree)->Left==NULL) && ((*bTree)->Right==NULL))
 	{
 		cout << "No Children found deleting Branch " << endl;
-		delete (*Tree);
-		*Tree = NULL;
+		delete (*bTree);
+		*bTree = NULL;
 	}
-	else if(((*Tree)->Left == NULL) && ((*Tree)->Right!=NULL))
+	else if(((*bTree)->Left == NULL) && ((*bTree)->Right!=NULL))
 	{
-		(*Tree)=(*Tree)->Right;
+		(*bTree)=(*bTree)->Right;
 		cout << "No Children on left " << endl;
 	}
-	else if(((*Tree)->Right == NULL) && ((*Tree)->Left!=NULL))
+	else if(((*bTree)->Right == NULL) && ((*bTree)->Left!=NULL))
 	{
-		(*Tree)=(*Tree)->Left;
+		(*bTree)=(*bTree)->Left;
 		cout << "No Children on right " << endl;
 	}
 	else
 	{
 		cout << "Two children" << endl;
-		Temp=(*Tree)->Right;
-		while(Temp->Left!=NULL)
-			Temp=Temp->Left;
-		MoveNode=Temp;
-		(*Tree)->Value=MoveNode->Value;
-		Temp->Left=(*Tree)->Left;
-		Temp=(*Tree);
-		(*Tree)=(*Tree)->Right;
+		bTemp=(*bTree)->Right;
+		while(bTemp->Left!=NULL)
+			bTemp=bTemp->Left;
+		moveNode=bTemp;
+		(*bTree)->Value=moveNode->Value;
+		bTemp->Left=(*bTree)->Left;
+		bTemp=(*bTree);
+		(*bTree)=(*bTree)->Right;
 
-		delete Temp;
+		delete bTemp;
 	}
 	return TRUE;
 }

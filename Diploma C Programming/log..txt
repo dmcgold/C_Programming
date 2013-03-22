@@ -1,2 +1,7 @@
 
 [20/3/2013][2:16:45] Adding to trees Minor error
+[22/3/2013][21:36:13] Adding to trees Minor error
+[22/3/2013][21:36:23] Adding to trees Minor error
+[22/3/2013][21:36:34] Searching for  Minor error
+[22/3/2013][21:36:34] Deleting from tree Major error
+[22/3/2013][21:40:14] Adding to trees Minor error

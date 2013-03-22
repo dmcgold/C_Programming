@@ -13,4 +13,5 @@ struct mStruct   // mStruct = Map Structure
 unsigned int HashCode(char *);
 void AddNode(mStruct **,char * ,int);
 int Add(char *,int,mStruct []);
-unsigned int Find(char *,mStruct []);
+boolean Find(int ,mStruct []);
+boolean DeleteMap(int ,mStruct []);

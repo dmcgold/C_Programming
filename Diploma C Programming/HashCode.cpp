@@ -110,7 +110,7 @@ int Add(char *Key,int Value,mStruct hashMap[])
 {
 	unsigned int Hash=HashCode(Key);
 
-	if(Find(Key,hashMap)) // already exists
+	if(Find(HashCode(Key),hashMap)) // already exists
 	{
 		AddNode(&hashMap[Hash].Next,Key,Value);
 	}
@@ -123,21 +123,29 @@ int Add(char *Key,int Value,mStruct hashMap[])
 	return Hash;
 }
 
-unsigned int Find(char *Key,mStruct hashMap[])
+boolean Find(int Key,mStruct hashMap[])
 {
-	int Hash=HashCode(Key);
-	int Count=0;
-	if(hashMap[Hash].Key!=NULL)
-	{
-		while((hashMap[Hash].Next != 0) && (hashMap[Hash].Key != Key))  // Search for first occurrence of Key
-		{
-			hashMap[Hash]=*hashMap[Hash].Next;
-		}
-		if(strcmp(hashMap[Hash].Key,Key)==0)
-			return Hash;
-		else
-			return 0;
-	}
+	if(hashMap[Key].Key!=NULL)
+		return TRUE;
 	else
-		return 0; // Key is null no data stored at hash
+		return FALSE;
+}
+
+boolean DeleteMap(int searchKey,mStruct hashMap[])
+{
+	mStruct *temp,*head;
+	if(hashMap[searchKey].Key == NULL)
+		return FALSE;
+	while(hashMap[searchKey].Next!=NULL)
+	{
+		head=hashMap[searchKey].Next;
+		while(head != NULL)
+			head=(*head).Next;
+		delete(head);
+		temp=head;
+		hashMap[searchKey].Next=temp;
+	}
+	hashMap[searchKey].Key=NULL;
+	hashMap[searchKey].Value=0;
+	return(hashMap[searchKey].Key==NULL);
 }

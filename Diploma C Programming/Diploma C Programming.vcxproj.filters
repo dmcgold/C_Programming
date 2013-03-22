@@ -36,18 +36,12 @@
     <ClCompile Include="LinkedLists.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Week 1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Binary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Logs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Week 1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Run.h">

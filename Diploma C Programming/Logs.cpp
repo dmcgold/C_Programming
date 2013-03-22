@@ -5,9 +5,9 @@
 
 using namespace std;
 
-char *ErrStr(int ErrorLevel)
+char *ErrStr(int errorLevel)
 {
-	switch (ErrorLevel)
+	switch (errorLevel)
 	{
 	case MINOR_ERROR :	return "Minor error";
 		break;
@@ -20,28 +20,28 @@ char *ErrStr(int ErrorLevel)
 	}
 	return "No Error";
 }
-int Log(char *Str, int ErrorLevel,int Output)
+int Log(char *msgString, int errorLevel,int whereTo)
 {
 	SYSTEMTIME time;
 	GetLocalTime(&time);
 
 #ifdef CREATE_LOG
 	{
-		switch(Output)
+		switch(whereTo)
 		{
 		case OUT_TO_FILE :
 			{
-				ofstream LogFile;
-				LogFile.open ("log..txt",ios::app);
-				LogFile << "[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
-					<< time.wMinute << ":" << time.wSecond << "] " << Str << " " << ErrStr(ErrorLevel) << "\n";
-				LogFile.close();
+				ofstream logFile;
+				logFile.open ("log..txt",ios::app);
+				logFile << "[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
+					<< time.wMinute << ":" << time.wSecond << "] " << msgString << " " << ErrStr(errorLevel) << "\n";
+				logFile.close();
 			}
 			break;
 		case OUT_TO_SCR :
 			{
 				cout << "\n[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
-					<< time.wMinute << ":" << time.wSecond << "] " << Str << " " << ErrStr(ErrorLevel) << "\n";
+					<< time.wMinute << ":" << time.wSecond << "] " << msgString << " " << ErrStr(errorLevel) << "\n";
 			};
 			break;
 		}

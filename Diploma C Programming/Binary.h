@@ -12,5 +12,5 @@ struct BinaryStruct
 
 void AddToTree(BinaryStruct **, int);
 void DisplayTree(BinaryStruct **);
-BinaryStruct **SearchTree(BinaryStruct **Tree,int No);
-boolean DeleteLeaf (BinaryStruct **Tree,int No);
+BinaryStruct **SearchTree(BinaryStruct **,int);
+boolean DeleteLeaf (BinaryStruct **,int);

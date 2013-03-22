@@ -1,114 +1,127 @@
 #include "Utils.h"
-#include <Windows.h>
-#include <string>
 
 using namespace std;
 
-void PressKey(char *Str)
+void PressKey(char *msgString)
 {
-	char Ch=(char) 254;
-	cout << Str << endl << endl << "Press any key to cont";
+	char contCh=(char) 254;
+	cout << msgString << endl << endl << "Press any key to cont";
 	do
 	{
-		Ch=_getch();
+		contCh=_getch();
 	}
-	while (Ch==254);
+	while (contCh==254);
 }
 
 char GetCh(void)
 {
-	char Ch=' ';
+	char chosenChar=' ';
 	do
 	{
-		Ch=toupper(_getch());
-	} while (Ch==' ');
-	return Ch;
+		chosenChar=toupper(_getch());
+	} while (chosenChar==' ');
+	return chosenChar;
 }
 
-SYSTEMTIME GetTotalTime(SYSTEMTIME Start,SYSTEMTIME End)
+SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 {
-	SYSTEMTIME TotalTime=End;
+	SYSTEMTIME totalTime=endTime;
 
-	if((End.wHour-Start.wHour)<0)
+	if((endTime.wHour-startTime.wHour)<0)
 	{
-		TotalTime.wDay++;
-		TotalTime.wHour=((60-End.wHour) + (Start.wHour))-60;
+		totalTime.wDay++;
+		totalTime.wHour=((60-endTime.wHour) + (startTime.wHour))-60;
 	}
 	else
 	{
-		TotalTime.wHour=(End.wHour) + (Start.wHour);
+		totalTime.wHour=(endTime.wHour) + (startTime.wHour);
 	}
 
-	if((End.wMinute-Start.wMinute)<0)
+	if((endTime.wMinute-startTime.wMinute)<0)
 	{
-		TotalTime.wHour++;
-		TotalTime.wMinute=((60-End.wMinute) + (Start.wMinute))-60;
+		totalTime.wHour++;
+		totalTime.wMinute=((60-endTime.wMinute) + (startTime.wMinute))-60;
 	}
 	else
 	{
-		TotalTime.wMinute=(End.wMinute-Start.wMinute);
+		totalTime.wMinute=(endTime.wMinute-startTime.wMinute);
 	}
 
-	if((End.wSecond-Start.wSecond)<0)
+	if((endTime.wSecond-startTime.wSecond)<0)
 	{
-		TotalTime.wMinute++;
-		TotalTime.wSecond=((60-End.wSecond) + (Start.wSecond))-60;
+		totalTime.wMinute++;
+		totalTime.wSecond=((60-endTime.wSecond) + (startTime.wSecond))-60;
 	}
 	else
 	{
-		TotalTime.wSecond=(End.wSecond-Start.wSecond);
+		totalTime.wSecond=(endTime.wSecond-startTime.wSecond);
 	}
 
-	if((End.wMilliseconds-Start.wMilliseconds)<0)
+	if((endTime.wMilliseconds-startTime.wMilliseconds)<0)
 	{
-		TotalTime.wSecond++;
-		TotalTime.wMilliseconds=((60-End.wMilliseconds) + (Start.wMilliseconds))-1000;
+		totalTime.wSecond++;
+		totalTime.wMilliseconds=((60-endTime.wMilliseconds) + (startTime.wMilliseconds))-1000;
 	}
 	else
 	{
-		TotalTime.wMilliseconds=(End.wMilliseconds-Start.wMilliseconds);
+		totalTime.wMilliseconds=(endTime.wMilliseconds-startTime.wMilliseconds);
 	}
 
-	return TotalTime;
+	return totalTime;
 }
 
-__int64 StartCounter(double *PCFreq,int Accuracy)
+__int64 StartCounter(double *pcFreq,int timeAccuracy)
 {
 	LARGE_INTEGER li;
 	if(!QueryPerformanceFrequency(&li))
 		cout << "QueryPerformanceFrequency failed!\n";
 
-	switch (Accuracy)
+	switch (timeAccuracy)
 	{
-	case 0 : *PCFreq = double(li.QuadPart);break; // Seconds
-	case 1 : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
-	case 2 : *PCFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
-	default : *PCFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+		case 0 : *pcFreq = double(li.QuadPart);break; // Seconds
+		case 1 : *pcFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+		case 2 : *pcFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
+		default : *pcFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
 	}
 
 	QueryPerformanceCounter(&li);
 	return (li.QuadPart);
 }
 
-double GetCounter(__int64 CounterStart,double PCFreq)
+double GetCounter(__int64 counterStart,double pcFreq)
 {
 	LARGE_INTEGER li;
 	QueryPerformanceCounter(&li);
-	return double(li.QuadPart-CounterStart)/PCFreq;
+	return double(li.QuadPart-counterStart)/pcFreq;
 }
 
-char *randomString(int Size)
+char *RandomString(int strSize)
 {
 	int no=1;
-	char str[]="1234567890";
+	char newString[]="1234567890";	
 
-	srand ((unsigned int) time(NULL));
-
-	for(int b=0;b<10;b++){
+	for(int b=0;b<strSize;b++){
 		while((no<65) || (no>90) && ((no<97) || (no>122)))
 			no=((rand() % (122+1-65))+65);
-		str[b]=no;
+		newString[b]=no;
 		no=0;
 	}
-	return str;
+	return (newString);
+}
+
+char displayMenu(char *menuChoices[])
+{
+	int maxItems=atoi(menuChoices[0])+1;
+
+	system("cls");
+
+	printf("          Select option to run\n");
+	printf("         ______________________\n");
+	
+	for(int menuCounter=1;menuCounter<maxItems;menuCounter++)
+		printf("          %d) %s\n",menuCounter,menuChoices[menuCounter]);
+
+	printf("         ______________________\n");
+	printf("          Q) to Quit\n");
+	return(GetCh());
 }

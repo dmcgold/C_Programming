@@ -2,9 +2,9 @@
 
 using namespace std;
 
-void AddNode(ListStruct **List,int Val)
+void AddNode(ListStruct **linked_List,int Val)
 {
-	struct ListStruct *Head=*List;
+	struct ListStruct *Head=*linked_List;
 	struct ListStruct *Temp;
 
 	Temp = new ListStruct;
@@ -12,116 +12,116 @@ void AddNode(ListStruct **List,int Val)
 	Temp->Next=Head;
 	Head=Temp;
 
-	*List=Head;
+	*linked_List=Head;
 }
 
-void AddDoubleNode(ListStruct **List,ListStruct **Last,int Val)
+void AddDoubleNode(ListStruct **linked_List,ListStruct **Last,int Val)
 {
 	ListStruct *Temp;
 
 	Temp = new ListStruct;
 	Temp->Val=Val;
-	Temp->Next = (*List);
+	Temp->Next = (*linked_List);
 	Temp->Prev = NULL;
 	if(Temp->Next != NULL)
 		Temp->Next->Prev=Temp;
-	if((*List) == NULL)
+	if((*linked_List) == NULL)
 		(*Last)=Temp;
-	(*List)=Temp;
+	(*linked_List)=Temp;
 }
 
-void DeleteNode(ListStruct **List,int Val)
+void DeleteNode(ListStruct **linked_List,int Val)
 {
-	ListStruct *Head=*List;
-	ListStruct *Prev=*List;
-	ListStruct *temp=*List;
+	ListStruct *listHead=*linked_List;
+	ListStruct *listPrev=*linked_List;
+	ListStruct *listTemp=*linked_List;
 
-	if(Head->Val==Val)
+	if(listHead->Val==Val)
 	{
-		*List=temp->Next;
-		delete(temp);
-		temp=NULL;
+		*linked_List=listTemp->Next;
+		delete(listTemp);
+		listTemp=NULL;
 		return;
 	}
-	while((Head!=NULL) && (Head->Val!=Val))
+	while((listHead!=NULL) && (listHead->Val!=Val))
 	{
-		Prev=Head;
-		Head=Head->Next;
+		listPrev=listHead;
+		listHead=listHead->Next;
 	}
-	Prev->Next=Head->Next;
-	delete(Head);
-	Head=NULL;
+	listPrev->Next=listHead->Next;
+	delete(listHead);
+	listHead=NULL;
 }
 
-void DisplayNodes(ListStruct **List)
+void DisplayNodes(ListStruct **linked_List)
 {
-	ListStruct *Nodes=*List;
+	ListStruct *listNodes=*linked_List;
 
-	while(Nodes)
+	while(listNodes)
 	{
-		cout << "Current Value : "<< Nodes->Val << endl;
-		Nodes=Nodes->Next;
-	}
-}
-
-void DisplayDouble(ListStruct **List)
-{
-	if((*List)!=NULL)
-	{
-		cout << (*List)->Val << " ";
-		DisplayDouble(&(*List)->Next);
+		cout << "Current Value : "<< listNodes->Val << endl;
+		listNodes=listNodes->Next;
 	}
 }
 
-boolean SearchNodes(ListStruct **List,int No)
+void DisplayDouble(ListStruct **linked_List)
 {
-	while((*List != NULL) && ((*List)->Val != No))
+	if((*linked_List)!=NULL)
 	{
-		List=&(*List)->Next;
+		cout << (*linked_List)->Val << " ";
+		DisplayDouble(&(*linked_List)->Next);
 	}
-	if(((*List) != NULL) && (*List)->Val == No)
+}
+
+boolean SearchNodes(ListStruct **linked_List,int searchItem)
+{
+	while((*linked_List != NULL) && ((*linked_List)->Val != searchItem))
+	{
+		linked_List=&(*linked_List)->Next;
+	}
+	if(((*linked_List) != NULL) && (*linked_List)->Val == searchItem)
 		return TRUE;
 	else
 		return FALSE;
 }
 
-ListStruct*  InsertSort(ListStruct **List)
+ListStruct*  InsertSort(ListStruct **linked_List)
 {
-	ListStruct *ListStructs = *(List);
-	ListStruct *Sorted = NULL;
+	ListStruct *listStructs = *(linked_List);
+	ListStruct *sortedList = NULL;
 
-	while (ListStructs != NULL)
+	while (listStructs != NULL)
 	{
-		ListStruct *Head  = ListStructs;
-		ListStruct **Prev = &Sorted;
-		ListStructs = ListStructs->Next;
+		ListStruct *listHead  = listStructs;
+		ListStruct **listPrev = &sortedList;
+		listStructs = listStructs->Next;
 
 		while (TRUE)
 		{
-			if ((*Prev) || ((int) Head->Val < (int) (*Prev)->Val ))
+			if ((*listPrev) || ((int) listHead->Val < (int) (*listPrev)->Val ))
 			{
-				Head->Next = *Prev;
-				*Prev = Head;
+				listHead->Next = *listPrev;
+				*listPrev = listHead;
 				break;
 			}
 			else
 			{
-				Prev = &(*Prev)->Next;
+				listPrev = &(*listPrev)->Next;
 			}
 		}
 	}
-	return Sorted;
+	return sortedList;
 }
 
-void Sort(ListStruct **List)
+void Sort(ListStruct **linked_List)
 {
-	SYSTEMTIME  STime,ETime,TotalTime;
+	SYSTEMTIME  sTime,eTime,totalTime;
 
 	cout << endl << "Sorting list" << endl;
-	GetSystemTime(&STime);
-	(*List)=InsertSort(&(*List));
-	GetSystemTime(&ETime);
-	TotalTime=GetTotalTime(STime,ETime);
-	cout << "Sort completion time (MM:SS:Milliseconds) " << (int) TotalTime.wMinute << ":"\
-		<< (int) TotalTime.wSecond << ":" << (long) TotalTime.wMilliseconds << endl;
+	GetSystemTime(&sTime);
+	(*linked_List)=InsertSort(&(*linked_List));
+	GetSystemTime(&eTime);
+	totalTime=GetTotalTime(sTime,eTime);
+	cout << "Sort completion time (MM:SS:Milliseconds) " << (int) totalTime.wMinute << ":"\
+		<< (int) totalTime.wSecond << ":" << (long) totalTime.wMilliseconds << endl;
 }

@@ -87,7 +87,6 @@
     <ClCompile Include="Run Diploma.cpp" />
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Week 1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Binary.h" />
@@ -96,7 +95,6 @@
     <ClInclude Include="Logs.h" />
     <ClInclude Include="Run.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="Week 1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

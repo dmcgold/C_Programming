@@ -1,35 +1,24 @@
 #include <iostream>
 #include "Run.h"
-#include <conio.h>
+#include "Utils.h"
+#include <time.h>
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-	char Ch;
-
+	char menuCh;
+	char *mainMenu[]={"3","Linked Lists","Play with Trees","HashMaps"};
+	
+	srand ((unsigned int) time(NULL)); // 
 	do
 	{
-		Ch=' ';
-		system("cls");
-		cout << "Select program to run" << endl;
-		cout << "_____________________" << endl;
-
-		cout << "1) Week 1" << endl;
-		cout << "2) Linked Lists" << endl;
-		cout << "3) Play with Trees" << endl;
-		cout << "4) HashMaps" << endl;
-		cout << "Q) Quit" << endl;
-		do
+		menuCh=displayMenu(mainMenu);
+		switch (menuCh)
 		{
-			Ch=toupper(_getch());
-		} while (Ch==' ');
-		switch (Ch)
-		{
-		case '1' : runWeek1();break;
-		case '2' : runLinkedLists();break;
-		case '3' : runTrees();break;
-		case '4' : runHash();break;
+			case '1' : runLinkedLists();break;
+			case '2' : runTrees();break;
+			case '3' : runHash();break;
 		}
-	} while (Ch!='Q');
+	} while (menuCh!='Q');
 }
