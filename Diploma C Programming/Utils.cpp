@@ -4,13 +4,13 @@ using namespace std;
 
 void PressKey(char *msgString)
 {
-	char contCh=(char) 254;
+	char getChar=(char) 254;
 	cout << msgString << endl << endl << "Press any key to cont";
 	do
 	{
-		contCh=_getch();
+		getChar=_getch();
 	}
-	while (contCh==254);
+	while (getChar==254);
 }
 
 char GetCh(void)
@@ -27,7 +27,7 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 {
 	SYSTEMTIME totalTime=endTime;
 
-	if((endTime.wHour-startTime.wHour)<0)
+	if ((endTime.wHour-startTime.wHour)<0)
 	{
 		totalTime.wDay++;
 		totalTime.wHour=((60-endTime.wHour) + (startTime.wHour))-60;
@@ -37,7 +37,7 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 		totalTime.wHour=(endTime.wHour) + (startTime.wHour);
 	}
 
-	if((endTime.wMinute-startTime.wMinute)<0)
+	if ((endTime.wMinute-startTime.wMinute)<0)
 	{
 		totalTime.wHour++;
 		totalTime.wMinute=((60-endTime.wMinute) + (startTime.wMinute))-60;
@@ -47,7 +47,7 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 		totalTime.wMinute=(endTime.wMinute-startTime.wMinute);
 	}
 
-	if((endTime.wSecond-startTime.wSecond)<0)
+	if ((endTime.wSecond-startTime.wSecond)<0)
 	{
 		totalTime.wMinute++;
 		totalTime.wSecond=((60-endTime.wSecond) + (startTime.wSecond))-60;
@@ -57,7 +57,7 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 		totalTime.wSecond=(endTime.wSecond-startTime.wSecond);
 	}
 
-	if((endTime.wMilliseconds-startTime.wMilliseconds)<0)
+	if ((endTime.wMilliseconds-startTime.wMilliseconds)<0)
 	{
 		totalTime.wSecond++;
 		totalTime.wMilliseconds=((60-endTime.wMilliseconds) + (startTime.wMilliseconds))-1000;
@@ -73,7 +73,7 @@ SYSTEMTIME GetTotalTime(SYSTEMTIME startTime,SYSTEMTIME endTime)
 __int64 StartCounter(double *pcFreq,int timeAccuracy)
 {
 	LARGE_INTEGER li;
-	if(!QueryPerformanceFrequency(&li))
+	if (!QueryPerformanceFrequency(&li))
 		cout << "QueryPerformanceFrequency failed!\n";
 
 	switch (timeAccuracy)
@@ -100,8 +100,8 @@ char *RandomString(int strSize)
 	int no=1;
 	char newString[]="1234567890";	
 
-	for(int b=0;b<strSize;b++){
-		while((no<65) || (no>90) && ((no<97) || (no>122)))
+	for (int b=0;b<strSize;b++){
+		while ((no<65) || (no>90) && ((no<97) || (no>122)))
 			no=((rand() % (122+1-65))+65);
 		newString[b]=no;
 		no=0;
@@ -109,17 +109,17 @@ char *RandomString(int strSize)
 	return (newString);
 }
 
-char displayMenu(char *menuChoices[])
+char displayMenu(char *getMenuChoices[])
 {
-	int maxItems=atoi(menuChoices[0])+1;
+	int maxItems=atoi(getMenuChoices[0])+1;
 
 	system("cls");
 
 	printf("          Select option to run\n");
 	printf("         ______________________\n");
 	
-	for(int menuCounter=1;menuCounter<maxItems;menuCounter++)
-		printf("          %d) %s\n",menuCounter,menuChoices[menuCounter]);
+	for (int menuCounter=1;menuCounter<maxItems;menuCounter++)
+		printf("          %d) %s\n",menuCounter,getMenuChoices[menuCounter]);
 
 	printf("         ______________________\n");
 	printf("          Q) to Quit\n");

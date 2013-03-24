@@ -110,7 +110,7 @@ int Add(char *Key,int Value,mStruct hashMap[])
 {
 	unsigned int Hash=HashCode(Key);
 
-	if(Find(HashCode(Key),hashMap)) // already exists
+	if (Find(HashCode(Key),hashMap)) // already exists
 	{
 		AddNode(&hashMap[Hash].Next,Key,Value);
 	}
@@ -125,7 +125,7 @@ int Add(char *Key,int Value,mStruct hashMap[])
 
 boolean Find(int Key,mStruct hashMap[])
 {
-	if(hashMap[Key].Key!=NULL)
+	if (hashMap[Key].Key!=NULL)
 		return TRUE;
 	else
 		return FALSE;
@@ -134,12 +134,12 @@ boolean Find(int Key,mStruct hashMap[])
 boolean DeleteMap(int searchKey,mStruct hashMap[])
 {
 	mStruct *temp,*head;
-	if(hashMap[searchKey].Key == NULL)
+	if (hashMap[searchKey].Key == NULL)
 		return FALSE;
-	while(hashMap[searchKey].Next!=NULL)
+	while (hashMap[searchKey].Next!=NULL)
 	{
 		head=hashMap[searchKey].Next;
-		while(head != NULL)
+		while (head != NULL)
 			head=(*head).Next;
 		delete(head);
 		temp=head;

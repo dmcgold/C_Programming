@@ -1,17 +1,17 @@
 #include <Windows.h>
 #include "Utils.h"
 
-struct ListStruct {
+struct listStruct {
 	int Val;
-	struct ListStruct *Next;
-	struct ListStruct *Prev;
+	struct listStruct *Next;
+	struct listStruct *Prev;
 };
 
-void AddNode(ListStruct **,int);
-void AddDoubleNode(ListStruct **,ListStruct **,int);
-void DeleteNode(ListStruct **,int);
-void DisplayNodes(ListStruct **);
-void DisplayDouble(ListStruct **);
-boolean SearchNodes(ListStruct **,int);
-ListStruct* InsertSort(ListStruct **);
-void Sort(ListStruct **);
+void AddNode(listStruct **,int);
+void AddDoubleNode(listStruct **,listStruct **,int);
+void DeleteNode(listStruct **,int);
+void DisplayNodes(listStruct **);
+void DisplayDouble(listStruct **);
+boolean SearchNodes(listStruct **,int);
+listStruct* BubbleSort(listStruct **);
+void Sort(listStruct **);
