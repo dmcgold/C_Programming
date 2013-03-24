@@ -2,11 +2,11 @@
 
 using namespace std;
 
-void AddToTree(BinaryStruct **bTree, int bValue)
+void AddToTree(binaryStruct **bTree, int bValue)
 {
 	if ( (*bTree) == NULL)
 	{
-		(*bTree) = new BinaryStruct;
+		(*bTree) = new binaryStruct;
 		(*bTree)->Value=bValue;
 		(*bTree)->Left=NULL;
 		(*bTree)->Right=NULL;
@@ -20,7 +20,7 @@ void AddToTree(BinaryStruct **bTree, int bValue)
 	}
 }
 
-void DisplayTree(BinaryStruct **bTree)
+void DisplayTree(binaryStruct **bTree)
 {
 	if (*bTree != NULL)
 	{
@@ -30,9 +30,9 @@ void DisplayTree(BinaryStruct **bTree)
 	}
 }
 
-BinaryStruct **SearchTree(BinaryStruct **bTree,int bValue)
+binaryStruct **SearchTree(binaryStruct **bTree,int bValue)
 {
-	BinaryStruct **tmp= bTree;
+	binaryStruct **tmp= bTree;
 
 	while (*tmp != NULL)
 	{
@@ -46,10 +46,10 @@ BinaryStruct **SearchTree(BinaryStruct **bTree,int bValue)
 	return tmp;
 }
 
-boolean DeleteLeaf(BinaryStruct **bTree, int bValue)
+boolean DeleteLeaf(binaryStruct **bTree, int bValue)
 {
-	BinaryStruct *bTemp;
-	BinaryStruct *moveNode;
+	binaryStruct *bTemp;
+	binaryStruct *moveNode;
 	Log("Deleting from tree",MAJOR_ERROR,OUT_TO_FILE);
 	bTree=SearchTree(bTree,bValue);
 

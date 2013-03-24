@@ -7,14 +7,14 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	char getgetMenuChoice;
+	char getMenuChoice;
 	char *mainMenu[]={"3","Linked Lists","Play with Trees","HashMaps"};
 	
 	srand ((unsigned int) time(NULL)); // 
 	do
 	{
-		getgetMenuChoice=displayMenu(mainMenu);
-		switch (getgetMenuChoice)
+		getMenuChoice=displayMenu(mainMenu);
+		switch (getMenuChoice)
 		{
 			case '1':	runLinkedLists();
 						break;
@@ -23,5 +23,5 @@ int main(int argc, char* argv[])
 			case '3':	runHash();
 						break;
 		}
-	} while (getgetMenuChoice!='Q');
+	} while (getMenuChoice!='Q');
 }

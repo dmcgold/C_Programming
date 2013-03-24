@@ -2,84 +2,78 @@
 
 using namespace std;
 
-void AddNode(listStruct **linked_List,int Val)
+void AddNode(listStruct **linkedList,int Value,int *sizeOfList)
 {
-	struct listStruct *Head=*linked_List;
+	struct listStruct *Head=*linkedList;
 	struct listStruct *Temp;
 
 	Temp = new listStruct;
-	Temp->Val=Val;
+	Temp->Value=Value;
 	Temp->Next=Head;
 	Head=Temp;
-
-	*linked_List=Head;
+	sizeOfList++;
+	*linkedList=Head;
 }
 
-void AddDoubleNode(listStruct **linked_List,listStruct **Last,int Val)
+void AddDoubleNode(listStruct **linkedList,listStruct **last,int value)
 {
 	listStruct *Temp;
 
 	Temp = new listStruct;
-	Temp->Val=Val;
-	Temp->Next = (*linked_List);
+	Temp->Value=value;
+	Temp->Next = (*linkedList);
 	Temp->Prev = NULL;
 	if (Temp->Next != NULL)
 		Temp->Next->Prev=Temp;
-	if ((*linked_List) == NULL)
-		(*Last)=Temp;
-	(*linked_List)=Temp;
+	if ((*linkedList) == NULL)
+		(*last)=Temp;
+	(*linkedList)=Temp;
 }
 
-void DeleteNode(listStruct **linked_List,int Val)
+int DeleteNode(listStruct **linked_List,int searchItem,int nodeCount)
 {
 	listStruct *listHead=*linked_List;
-	listStruct *listPrev=*linked_List;
 	listStruct *listTemp=*linked_List;
 
-	if (listHead->Val==Val)
+	if(listHead->Value==searchItem)
 	{
 		*linked_List=listTemp->Next;
 		delete(listTemp);
 		listTemp=NULL;
-		return;
+		nodeCount--;
+		return nodeCount;
 	}
-	while ((listHead!=NULL) && (listHead->Val!=Val))
-	{
-		listPrev=listHead;
-		listHead=listHead->Next;
-	}
-	listPrev->Next=listHead->Next;
-	delete(listHead);
-	listHead=NULL;
+	nodeCount=DeleteNode(&(*linked_List)->Next,searchItem,nodeCount);
+	return nodeCount;
 }
 
-void DisplayNodes(listStruct **linked_List)
+void DisplayNodes(listStruct **linkedList)
 {
-	listStruct *listNodes=*linked_List;
+	listStruct *listNodes=*linkedList;
 
-	while (listNodes)
+	while (listNodes != NULL)
 	{
-		cout << "Current Value : "<< listNodes->Val << endl;
+		cout << "Current Value : "<< listNodes->Value << endl;
 		listNodes=listNodes->Next;
 	}
 }
 
-void DisplayDouble(listStruct **linked_List)
+void DisplayDouble(listStruct **linkedList)
 {
-	if ((*linked_List)!=NULL)
+	if ((*linkedList)!=NULL)
 	{
-		cout << (*linked_List)->Val << " ";
-		DisplayDouble(&(*linked_List)->Next);
+		cout << (*linkedList)->Value << " ";
+		DisplayDouble(&(*linkedList)->Next);
 	}
 }
 
-boolean SearchNodes(listStruct **linked_List,int searchItem)
+boolean SearchNodes(listStruct **linkedList,int searchItem)
 {
-	while ((*linked_List != NULL) && ((*linked_List)->Val != searchItem))
+	while ((*linkedList != NULL) && ((*linkedList)->Value != searchItem))
 	{
-		linked_List=&(*linked_List)->Next;
+		linkedList=&(*linkedList)->Next;
 	}
-	if (((*linked_List) != NULL) && (*linked_List)->Val == searchItem)
+	if (((*linkedList) != NULL) && (*linkedList)->Value == searchItem)
 		return TRUE;
 	else
 		return FALSE;
@@ -94,10 +88,10 @@ listStruct *BubbleSort(listStruct **head)
 
     while (tmpNxt != NULL){
            while (tmpNxt != tmpPtr){
-                    if (tmpNxt->Val < tmpPtr->Val){
-                            tmp = tmpPtr->Val;
-                            tmpPtr->Val = tmpNxt->Val;
-                            tmpNxt->Val = tmp;
+                    if (tmpNxt->Value < tmpPtr->Value){
+                            tmp = tmpPtr->Value;
+                            tmpPtr->Value = tmpNxt->Value;
+                            tmpNxt->Value = tmp;
                     }
                     tmpPtr = tmpPtr->Next;
             }
@@ -108,16 +102,80 @@ listStruct *BubbleSort(listStruct **head)
 } 
 
 
-void Sort(listStruct **linked_List)
+int get_lValue(listStruct *head, int l)
 {
-	SYSTEMTIME  sTime,eTime,totalTime;
+    while(head && l) {
+        head = head->Next;
+        l--;
+    }
+    if (head != NULL)
+        return head->Value;
+    else
+        return -1;
+}
+
+void swap(listStruct *head, int i, int j)
+{
+    listStruct *tmp = head;
+    int tmpiValue;
+    int tmpjValue;
+    int ti = i;
+    while(tmp && i) {
+        i--;
+        tmp = tmp->Next;
+    }
+    tmpiValue = tmp->Value;
+    tmp = head;
+    while(tmp && j) {
+        j--;
+        tmp = tmp->Next;
+    }
+    tmpjValue = tmp->Value;
+    tmp->Value = tmpiValue;
+    tmp = head;
+    i = ti;
+    while(tmp && i) {
+        i--;
+        tmp = tmp->Next;
+    }
+    tmp->Value = tmpjValue;
+}
+
+
+listStruct *QuickSort(listStruct *head, int l, int r)
+{
+    int i, j;
+    int jValue;
+    int pivot;
+    i = l + 1;
+    if (l + 1 < r) {
+        pivot = get_lValue(head, l);
+        for (j = l + 1; j <= r; j++) {
+            jValue = get_lValue(head, j);
+            if (jValue < pivot && jValue != -1) {
+                swap(head, i, j);
+                i++;
+            }
+        }
+        swap(head, i - 1, l);
+        QuickSort(head, l, i);
+        QuickSort(head, i, r);
+    }
+    return head;
+}
+
+
+void Sort(listStruct **linkedList,int sizeOfList)
+{
+	__int64 startCounter;
+	double endCounter;
+	double pcFreq=0.0;
 
 	cout << endl << "Sorting list" << endl;
-	GetSystemTime(&sTime);
-	(*linked_List)=BubbleSort(&(*linked_List));
-	//(*linked_List)=BubbleSort(&(*linked_List));
-	GetSystemTime(&eTime);
-	totalTime=GetTotalTime(sTime,eTime);
-	cout << "Sort completion time (MM:SS:Milliseconds) " << (int) totalTime.wMinute << ":"\
-		<< (int) totalTime.wSecond << ":" << (long) totalTime.wMilliseconds << endl;
+	startCounter=StartCounter(&pcFreq,SECONDS);
+	//(*linkedList)=BubbleSort(&(*linkedList));
+	(*linkedList)=QuickSort((*linkedList),0,sizeOfList);
+	
+	endCounter=GetCounter(startCounter,pcFreq);
+	cout << endl << "Sort completion time (Seconds) : " << endCounter << endl;
 }

@@ -3,14 +3,14 @@
 #include "Logs.h"
 #include "Utils.h"
 
-struct BinaryStruct
+struct binaryStruct
 {
 	int Value;
-	struct BinaryStruct *Left;
-	struct BinaryStruct *Right;
+	struct binaryStruct *Left;
+	struct binaryStruct *Right;
 };
 
-void AddToTree(BinaryStruct **, int);
-void DisplayTree(BinaryStruct **);
-BinaryStruct **SearchTree(BinaryStruct **,int);
-boolean DeleteLeaf (BinaryStruct **,int);
+void AddToTree(binaryStruct **, int);
+void DisplayTree(binaryStruct **);
+binaryStruct **SearchTree(binaryStruct **,int);
+boolean DeleteLeaf (binaryStruct **,int);

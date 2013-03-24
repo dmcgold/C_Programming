@@ -2,6 +2,10 @@
 #include <conio.h>
 #include <windows.h>
 #include <time.h>
+#define SECONDS		 0
+#define MILLISECONDS 1
+#define MICROSECONDS 2
+
 
 using namespace std;
 

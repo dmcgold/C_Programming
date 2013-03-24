@@ -78,10 +78,14 @@ __int64 StartCounter(double *pcFreq,int timeAccuracy)
 
 	switch (timeAccuracy)
 	{
-		case 0 : *pcFreq = double(li.QuadPart);break; // Seconds
-		case 1 : *pcFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
-		case 2 : *pcFreq = double(li.QuadPart)/1000000.0;break; // Microseconds
-		default : *pcFreq = double(li.QuadPart)/1000.0;break; // Milliseconds
+		case SECONDS		:	*pcFreq = double(li.QuadPart);
+								break;
+		case MILLISECONDS	:	*pcFreq = double(li.QuadPart)/1000.0;
+								break;
+		case MICROSECONDS	:	*pcFreq = double(li.QuadPart)/1000000.0;
+								break;
+		default :				*pcFreq = double(li.QuadPart)/1000.0;
+								break; // Milliseconds
 	}
 
 	QueryPerformanceCounter(&li);

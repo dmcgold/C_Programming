@@ -10,6 +10,9 @@ void runLinkedLists(void)
 
 	char getMenuChoice=' ';
 	int searchValue=0;
+	int initialSize=1000;
+	int sizeOfNodes=0;
+
 	do
 	{
 		getMenuChoice=displayMenu(listsMenu);
@@ -18,11 +21,11 @@ void runLinkedLists(void)
 			case '1' : 
 				{
 					cout << "Adding to Nodes" << endl;
-					for (int A=1; A<10; A++)
+					for (int A=1; A<initialSize; A++)
 					{
-						AddNode(&listData,A);
+						AddNode(&listData,rand() % (rand() * A),&sizeOfNodes); // More random that rand() alone
 					}
-					Log("Adding to trees",MINOR_ERROR,OUT_TO_FILE);
+					Log("Adding to nodes",MINOR_ERROR,OUT_TO_FILE);
 				}
 				break;
 			case '2' : 
@@ -46,14 +49,14 @@ void runLinkedLists(void)
 			{
 				cout << "Enter No to search for : ";
 				cin >> searchValue;
-				DeleteNode(&listData,searchValue);
+				sizeOfNodes=DeleteNode(&listData,searchValue,sizeOfNodes);
 			}
 			break;
 			case '5' : 
 			{
 				cout << "Sorting" << endl;
-				Sort(&listData);
-				cout << "Done" << endl;
+				Sort(&listData,sizeOfNodes);
+				PressKey("Done.....\n");
 			}
 			break;
 		}
@@ -62,8 +65,8 @@ void runLinkedLists(void)
 
 void runTrees(void)
 {
-	BinaryStruct *bTree=NULL;
-	BinaryStruct *tmp;
+	binaryStruct *bTree=NULL;
+	binaryStruct *tmp;
 	
 	char getMenuChoice=' ';
 	char *treeMenu[]={"4","Add to tree","Display Tree","Search Tree","Delete from Tree"};
