@@ -15,35 +15,23 @@ void AddNode(listStruct **linkedList,int Value,int *sizeOfList)
 	*linkedList=Head;
 }
 
-void AddDoubleNode(listStruct **linkedList,listStruct **last,int value)
-{
-	listStruct *Temp;
-
-	Temp = new listStruct;
-	Temp->Value=value;
-	Temp->Next = (*linkedList);
-	Temp->Prev = NULL;
-	if (Temp->Next != NULL)
-		Temp->Next->Prev=Temp;
-	if ((*linkedList) == NULL)
-		(*last)=Temp;
-	(*linkedList)=Temp;
-}
-
 int DeleteNode(listStruct **linked_List,int searchItem,int nodeCount)
 {
 	listStruct *listHead=*linked_List;
 	listStruct *listTemp=*linked_List;
 
-	if(listHead->Value==searchItem)
+	if(listHead!=NULL)
 	{
-		*linked_List=listTemp->Next;
-		delete(listTemp);
-		listTemp=NULL;
-		nodeCount--;
-		return nodeCount;
+		if(listHead->Value==searchItem)
+		{
+			*linked_List=listTemp->Next;
+			delete(listTemp);
+			listTemp=NULL;
+			nodeCount--;
+			return nodeCount;
+		}
+		nodeCount=DeleteNode(&(*linked_List)->Next,searchItem,nodeCount);
 	}
-	nodeCount=DeleteNode(&(*linked_List)->Next,searchItem,nodeCount);
 	return nodeCount;
 }
 
@@ -55,15 +43,6 @@ void DisplayNodes(listStruct **linkedList)
 	{
 		cout << "Current Value : "<< listNodes->Value << endl;
 		listNodes=listNodes->Next;
-	}
-}
-
-void DisplayDouble(listStruct **linkedList)
-{
-	if ((*linkedList)!=NULL)
-	{
-		cout << (*linkedList)->Value << " ";
-		DisplayDouble(&(*linkedList)->Next);
 	}
 }
 

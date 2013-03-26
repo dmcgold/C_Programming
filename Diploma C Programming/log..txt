@@ -63,3 +63,5 @@
 [24/3/2013][21:37:55] Adding to nodes Minor error
 [24/3/2013][21:39:7] Adding to nodes Minor error
 [24/3/2013][21:39:47] Adding to nodes Minor error
+[27/3/2013][1:9:54] Adding to nodes Minor error
+[27/3/2013][1:16:19] Adding to nodes Minor error

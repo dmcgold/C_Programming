@@ -110,22 +110,61 @@ char *RandomString(int strSize)
 		newString[b]=no;
 		no=0;
 	}
-	return (newString);
+	return newString;
 }
+
 
 char displayMenu(char *getMenuChoices[])
 {
 	int maxItems=atoi(getMenuChoices[0])+1;
+	int maxLen=strlen(" Select option to run \n");
+
+	// Get the max length of the menu strings
+
+	for ( int a=0;a<maxItems;a++)
+	{
+		(( int ) strlen(getMenuChoices[a]) > maxLen) ? maxLen=strlen(getMenuChoices[a]) : maxLen=maxLen;
+	}
+
 
 	system("cls");
 
-	printf("          Select option to run\n");
-	printf("         ______________________\n");
-	
-	for (int menuCounter=1;menuCounter<maxItems;menuCounter++)
-		printf("          %d) %s\n",menuCounter,getMenuChoices[menuCounter]);
+	// Drawing lines
 
-	printf("         ______________________\n");
-	printf("          Q) to Quit\n");
-	return(GetCh());
+	printf("%c",201);
+	for ( int a=1;a<maxLen;a++)
+		printf("%c",205);
+	printf("%c\n",187);
+
+	printf("%c Select option to run %c\n",186,186);
+		printf("%c",199);
+	for ( int b=1;b<maxLen;b++)
+		printf("%c",196);
+	printf("%c\n",182);
+	
+	// Display Menu
+
+	for ( int menuCounter=1;menuCounter<maxItems;menuCounter++)
+	{
+		printf("%c %d) %s",186,menuCounter,getMenuChoices[menuCounter]);
+		for( int b=1;b<( int )(maxLen-strlen(getMenuChoices[menuCounter])-4);b++)
+			printf(" ");
+		printf("%c\n",186);
+	}
+
+	// Drawing lines
+
+	printf("%c",199);
+	for( int b=1;b<maxLen;b++)
+		printf("%c",196);
+	printf("%c\n",182);
+	printf("%c Q) to Quit           %c\n",186,186);
+	printf("%c",200);
+	for ( int a=1;a<maxLen;a++)
+		printf("%c",205);
+	printf("%c\n",188);
+
+	// Get character and run
+	return GetCh();
+	
 }
