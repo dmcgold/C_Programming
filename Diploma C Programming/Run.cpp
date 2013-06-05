@@ -18,23 +18,26 @@ void runLinkedLists(void)
 		getMenuChoice=displayMenu(listsMenu);
 		switch (getMenuChoice)
 		{
-			case '1' : 
+		case '1' :
+			{
+				cout << endl << "Enter no of items to add : ";
+				cin >> initialSize;
+				initialSize++;
+				cout << endl << "Adding items Nodes" << endl;
+				for (int A=1; A<initialSize; A++)
 				{
-					cout << "Adding to Nodes" << endl;
-					for (int A=1; A<initialSize; A++)
-					{
-						AddNode(&listData,rand() % (rand() * A),&sizeOfNodes); // More random that rand() alone
-					}
-					Log("Adding to nodes",MINOR_ERROR,OUT_TO_FILE);
+					sizeOfNodes=AddNode(&listData,rand() % (rand() * A),sizeOfNodes); // More random that rand() alone
 				}
-				break;
-			case '2' : 
+				Log("Adding to nodes",MINOR_ERROR,OUT_TO_FILE);
+			}
+			break;
+		case '2' :
 			{
 				DisplayNodes(&listData);
 				PressKey(" ");
 			}
 			break;
-			case '3' : 
+		case '3' :
 			{
 				cout << "Enter No to search for : ";
 				cin >> searchValue;
@@ -45,14 +48,14 @@ void runLinkedLists(void)
 				PressKey(" ");
 			}
 			break;
-			case '4' : 
+		case '4' :
 			{
 				cout << "Enter No to search for : ";
 				cin >> searchValue;
 				sizeOfNodes=DeleteNode(&listData,searchValue,sizeOfNodes);
 			}
 			break;
-			case '5' : 
+		case '5' :
 			{
 				cout << "Sorting" << endl;
 				Sort(&listData,sizeOfNodes);
@@ -67,18 +70,18 @@ void runTrees(void)
 {
 	binaryStruct *bTree=NULL;
 	binaryStruct *tmp;
-	
+
 	char getMenuChoice=' ';
 	char *treeMenu[]={"4","Add to tree","Display Tree","Search Tree","Delete from Tree"};
 	int searchValue=0;
 	srand((int) time(NULL));
-	
+
 	do
 	{
 		getMenuChoice=displayMenu(treeMenu);
 		switch (getMenuChoice)
 		{
-			case '1' : 
+		case '1' :
 			{
 				cout << "Adding to trees\n";
 				AddToTree(&bTree, 5);
@@ -92,13 +95,13 @@ void runTrees(void)
 				Log("Adding to trees",MINOR_ERROR,OUT_TO_FILE);
 			}
 			break;
-			case '2' : 
+		case '2' :
 			{
 				DisplayTree(&bTree);
 				PressKey(" ");
 			}
 			break;
-			case '3' : 
+		case '3' :
 			{
 				cout << "Enter No to search for : ";
 				cin >> searchValue;
@@ -110,7 +113,7 @@ void runTrees(void)
 				PressKey(" ");
 			}
 			break;
-			case '4' : 
+		case '4' :
 			{
 				cout << "Enter No to search for : ";
 				cin >> searchValue;
@@ -145,12 +148,12 @@ void runHash(void)
 		getMenuChoice=displayMenu(hashMenu);
 		switch (getMenuChoice)
 		{
-			case '1' : 
+		case '1' :
 			{
 				printf("\nCreate random strings or use some fruit or Enter a String (R/F/O) : ");
 				switch(GetCh())
 				{
-					case 'R' : 
+				case 'R' :
 					{
 						printf("\nCreating %d random 10 character words\n",size);
 						for (int A=0;A<size;A++)
@@ -161,7 +164,7 @@ void runHash(void)
 						}
 					}
 					break;
-					case 'F' : 
+				case 'F' :
 					{
 						for (int A=0;A<sizeOfStr;A++)
 						{
@@ -170,43 +173,43 @@ void runHash(void)
 						}
 					}
 					break;
-					case 'O' : 
+				case 'O' :
 					{
 						printf("\nEnter a string : ");
 						gets(getStr);
 						Add(getStr,10,hashMap);
 					}
-					break;			
+					break;
 				}
 				PressKey("\nDone adding items");
 			}
 			break;
-			case '2' : 
+		case '2' :
+			{
+				printf("\nEnter a string to search for : ");
+				gets(getStr);
+				printf("\nSearching for %s\n",getStr);
+				hashInt=Find(HashCode(getStr),hashMap);
+				if (hashInt!=0)
 				{
-					printf("\nEnter a string to search for : ");
-					gets(getStr);		
-					printf("\nSearching for %s\n",getStr);
-					hashInt=Find(HashCode(getStr),hashMap);
-					if (hashInt!=0)
-					{
-						printf ("\nFound item %s \n",getStr);
-					}
-					else
-						printf ("\nFailed to find %s \n ",getStr);
-					PressKey(" ");
+					printf ("\nFound item %s \n",getStr);
 				}
-				break;
-			case '3' : 
-				{
-					printf("\nEnter a string to search for : ");
-					gets(getStr);		
-					printf("\nDeleting %s from Map\n",getStr);
-					if (DeleteMap(HashCode(getStr),hashMap))
-						PressKey("\nSuccessfully deleted item(s) from Map");
-					else
-						PressKey("\nDeletion was unsuccessful....");
-			   }
-				break;
+				else
+					printf ("\nFailed to find %s \n ",getStr);
+				PressKey(" ");
+			}
+			break;
+		case '3' :
+			{
+				printf("\nEnter a string to search for : ");
+				gets(getStr);
+				printf("\nDeleting %s from Map\n",getStr);
+				if (DeleteMap(HashCode(getStr),hashMap))
+					PressKey("\nSuccessfully deleted item(s) from Map");
+				else
+					PressKey("\nDeletion was unsuccessful....");
+			}
+			break;
 		} // End Switch
 	} while (getMenuChoice!='Q');
 }

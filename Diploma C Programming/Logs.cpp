@@ -45,7 +45,7 @@ int Log(char *msgString, int errorLevel,int whereTo)
 			case OUT_TO_FILE :
 			{
 				ofstream logFile;
-				logFile.open ("log..txt",ios::app);
+				logFile.open ("log.txt",ios::app);
 				logFile << "[" <<time.wDay << "/" << time.wMonth << "/" << time.wYear << "][" << time.wHour << ":"
 					<< time.wMinute << ":" << time.wSecond << "] " << msgString << " " << ErrStr(errorLevel) << "\n";
 				logFile.close();

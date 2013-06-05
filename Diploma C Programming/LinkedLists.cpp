@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void AddNode(listStruct **linkedList,int Value,int *sizeOfList)
+int AddNode(listStruct **linkedList,int Value,int sizeOfList)
 {
 	struct listStruct *Head=*linkedList;
 	struct listStruct *Temp;
@@ -11,8 +11,9 @@ void AddNode(listStruct **linkedList,int Value,int *sizeOfList)
 	Temp->Value=Value;
 	Temp->Next=Head;
 	Head=Temp;
-	sizeOfList++;
 	*linkedList=Head;
+	sizeOfList++;
+	return sizeOfList;
 }
 
 int DeleteNode(listStruct **linked_List,int searchItem,int nodeCount)
@@ -60,101 +61,79 @@ boolean SearchNodes(listStruct **linkedList,int searchItem)
 
 listStruct *BubbleSort(listStruct **head)
 {
-    listStruct *tmpPtr = (*head);
-    listStruct *tmpNxt = (*head)->Next;
+	listStruct *tmpPtr = (*head);
+	listStruct *tmpNxt = (*head)->Next;
 
-    int tmp;
+	int tmp;
 
-    while (tmpNxt != NULL){
-           while (tmpNxt != tmpPtr){
-                    if (tmpNxt->Value < tmpPtr->Value){
-                            tmp = tmpPtr->Value;
-                            tmpPtr->Value = tmpNxt->Value;
-                            tmpNxt->Value = tmp;
-                    }
-                    tmpPtr = tmpPtr->Next;
-            }
-            tmpPtr = (*head);
-            tmpNxt = tmpNxt->Next;
-    }
-         return tmpPtr ; // Place holder
-} 
-
-
-int get_lValue(listStruct *head, int l)
-{
-    while(head && l) {
-        head = head->Next;
-        l--;
-    }
-    if (head != NULL)
-        return head->Value;
-    else
-        return -1;
+	while (tmpNxt != NULL){
+		while (tmpNxt != tmpPtr){
+			if (tmpNxt->Value < tmpPtr->Value){
+				tmp = tmpPtr->Value;
+				tmpPtr->Value = tmpNxt->Value;
+				tmpNxt->Value = tmp;
+			}
+			tmpPtr = tmpPtr->Next;
+		}
+		tmpPtr = (*head);
+		tmpNxt = tmpNxt->Next;
+	}
+	return tmpPtr ; // Place holder
 }
 
-void swap(listStruct *head, int i, int j)
+int getValue(listStruct *head,int v)
 {
-    listStruct *tmp = head;
-    int tmpiValue;
-    int tmpjValue;
-    int ti = i;
-    while(tmp && i) {
-        i--;
-        tmp = tmp->Next;
-    }
-    tmpiValue = tmp->Value;
-    tmp = head;
-    while(tmp && j) {
-        j--;
-        tmp = tmp->Next;
-    }
-    tmpjValue = tmp->Value;
-    tmp->Value = tmpiValue;
-    tmp = head;
-    i = ti;
-    while(tmp && i) {
-        i--;
-        tmp = tmp->Next;
-    }
-    tmp->Value = tmpjValue;
+	v--;
+	for(int a=0;a<v;a++)
+		head=head->Next;
+	return head->Value;
 }
 
-
-listStruct *QuickSort(listStruct *head, int l, int r)
+void qSwap(listStruct *head,int left,int right)
 {
-    int i, j;
-    int jValue;
-    int pivot;
-    i = l + 1;
-    if (l + 1 < r) {
-        pivot = get_lValue(head, l);
-        for (j = l + 1; j <= r; j++) {
-            jValue = get_lValue(head, j);
-            if (jValue < pivot && jValue != -1) {
-                swap(head, i, j);
-                i++;
-            }
-        }
-        swap(head, i - 1, l);
-        QuickSort(head, l, i);
-        QuickSort(head, i, r);
-    }
-    return head;
+	listStruct *tmpHead=head;
+	int a=getValue(head,left);
+	int b=getValue(head,right);
+	if(left==right)
+		return;
+	while((tmpHead->Value !=a) && (tmpHead->Next!='\0'))
+		tmpHead=tmpHead->Next;
+	tmpHead->Value=b;
+	tmpHead=tmpHead->Next;
+	while((tmpHead->Value !=b) && (tmpHead->Next!='\0'))
+		tmpHead=tmpHead->Next;
+	tmpHead->Value=a;
+	head=tmpHead;
 }
 
+void qSort(listStruct *head, int l, int u)
+{
+	int i,m;
+
+	if(l>=u) return;
+	m=l;
+	for(i=l+1;i<=u;i++)
+		if(getValue(head,i) < getValue(head,l))
+			qSwap(head,++m ,i);
+	qSwap(head,l,m);
+	qSort(head,l,m-1);
+	qSort(head,m+1,u);
+}
 
 void Sort(listStruct **linkedList,int sizeOfList)
 {
 	__int64 startCounter;
 	double endCounter;
 	double pcFreq=0.0;
+	char counterStr[10];
 
+	strcpy(counterStr,"");
 	cout << endl << "Sorting list" << endl;
 	startCounter=StartCounter(&pcFreq,SECONDS);
 	//(*linkedList)=BubbleSort(&(*linkedList));
-	(*linkedList)=QuickSort((*linkedList),0,sizeOfList);
-	
+	//(*linkedList)=QuickSort((*linkedList),0,sizeOfList);
+	qSort((*linkedList),0,sizeOfList);
 	endCounter=GetCounter(startCounter,pcFreq);
-	cout << endl << "Sort completion time (Seconds) : " << endCounter << endl;
+	sprintf(counterStr,"%4.5f",endCounter);
+	cout << endl << "Sort completed in " << counterStr << " seconds" << endl << endl;
 }
